@@ -16,4 +16,11 @@ public class ComplaintTicket {
         this.roomID = roomID;
         this.openTime = openTime;
     }
+    
+    public void closeTicket() 
+    {
+    	complete = true;
+    }
+    
+    
 }

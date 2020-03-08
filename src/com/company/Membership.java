@@ -10,24 +10,37 @@ public class Membership {
     private Date expiration;
 
     //Constructor
-    public Membership(String type, List<String> perks, int level, Date expiration)
-    {
+    public Membership(String type, List<String> perks, int level, Date expiration) {
         this.type = type;
-        this.perks = perks;
-        this.level = level;
+        this.setPerks(perks);
+        this.setLevel(level);
         this.expiration = expiration;
     }
-
+    
     //Function to upgrade membership
-    public void upgradeMembership()
-    {
-
+    public void upgradeMembership() {
+    	setLevel(getLevel() + 1);
     }
 
     //Function to cancel membership
-    public void cancelMembership()
-    {
-
+    public void cancelMembership() {
+    	type = null;
     }
+    
+	public List<String> getPerks() {
+		return perks;
+	}
+
+	public void setPerks(List<String> perks) {
+		this.perks = perks;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 }
