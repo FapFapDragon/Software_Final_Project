@@ -72,20 +72,14 @@ public class Customer {
     	}
     }
 
-    //
-    public void requestRoomService()
+    public void generateComplaint()
     {
     	
     }
 
-    public void generateComplaint()
-    {
-
-    }
-
     public void removeComplaint()
     {
-
+    	
     }
 
 	public boolean isMembershipActive() {
