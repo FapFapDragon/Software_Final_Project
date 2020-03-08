@@ -1,11 +1,11 @@
 package com.company;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Housekeeping extends Employee {
 
     //Shared among all kitchen staff
-    static private List<CleaningTicket> activeTickets;
+    static private ArrayList<CleaningTicket> activeTickets;
 
     //Move ticket from active to complete
     public void CompleteTicket()
