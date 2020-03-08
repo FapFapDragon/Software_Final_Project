@@ -18,24 +18,27 @@ public class Room {
 	private List<Date> futureBookings;
 	private RoomServiceTicket roomService;
 
-	public Room(int ID, int beds, Size size, View view, int floor)
-    {
-    	this.ID = ID;
-    	this.beds = beds;
-    	this.size = size;
-    	this.view = view;
-    	this.floor = floor;
-    	this.state = State.CLEAN;
-    	this.client = null;
-    	this.checkOutDate = null;
-    	this.futureBookings = null;
-    	this.roomService = null;
-    }
-	
-	public void checkIn(Customer client, Date checkOutDate) {
-		this.client = client;
-		this.checkInDate = new Date();
-		this.checkOutDate = checkOutDate;
+	public Room(int ID, int beds, Size size, View view, int floor) {
+		this.ID = ID;
+		this.beds = beds;
+		this.size = size;
+		this.view = view;
+		this.floor = floor;
+		this.setState(State.CLEAN);
+		this.setClient(null);
+		this.setCheckOutDate(null);
+		this.futureBookings = null;
+		this.roomService = null;
+	}
+
+	public boolean checkIn(Customer client, Date checkOutDate) {
+		if (this.getState() == State.CLEAN) {
+			this.setClient(client);
+			this.setCheckInDate(new Date());
+			this.setCheckOutDate(checkOutDate);
+			return true;
+		} else
+			return false;
 	}
 
 	public void reserve(Date checkInDate) {
@@ -47,7 +50,45 @@ public class Room {
 	}
 
 	public void checkout() {
-		this.client = null;
+		this.setClient(null);
+		this.setCheckInDate(null);
+		this.setCheckOutDate(null);
+		this.setState(State.PICKUP);
 	}
 
+	public void changeState(State state) {
+		this.state = state;
+	}
+	
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	public Date getCheckInDate() {
+		return checkInDate;
+	}
+
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
+	}
+
+	public Customer getClient() {
+		return client;
+	}
+
+	public void setClient(Customer client) {
+		this.client = client;
+	}
+
+	public Date getCheckOutDate() {
+		return checkOutDate;
+	}
+
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
 }
