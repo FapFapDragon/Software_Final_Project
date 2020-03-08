@@ -28,7 +28,7 @@ public class Room {
 		this.setClient(null);
 		this.setCheckOutDate(null);
 		this.futureBookings = null;
-		this.roomService = null;
+		this.setRoomService(null);
 	}
 
 	public boolean checkIn(Customer client, Date checkOutDate) {
@@ -90,5 +90,13 @@ public class Room {
 
 	public void setCheckOutDate(Date checkOutDate) {
 		this.checkOutDate = checkOutDate;
+	}
+
+	public RoomServiceTicket getRoomService() {
+		return roomService;
+	}
+
+	public void setRoomService(RoomServiceTicket roomService) {
+		this.roomService = roomService;
 	}
 }
