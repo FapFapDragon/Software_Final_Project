@@ -27,7 +27,7 @@ public class Room {
     	this.floor = floor;
     	this.state = State.CLEAN;
     	this.client = null;
-    	this.checkoutDate = null;
+    	this.checkOutDate = null;
     	this.futureBookings = null;
     	this.roomService = null;
     }
@@ -38,8 +38,8 @@ public class Room {
 		this.checkOutDate = checkOutDate;
 	}
 
-	public void reserve() {
-		
+	public void reserve(Date checkInDate) {
+		futureBookings.add(checkInDate)
 	}
 
 	public List<Date> checkListings() {
