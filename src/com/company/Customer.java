@@ -18,9 +18,6 @@ public class Customer {
     private String notes;
     private String importantNotes;
 
-    private boolean roomService;
-    private RoomServiceTicket RS;
-
     private boolean complaint;
     private ComplaintTicket complaintTicket;
 
@@ -47,31 +44,37 @@ public class Customer {
     }
 
     //Check person into room
-    public void checkIn(Room room)
+    public void checkIn(Room room, Date checkout)
     {
     	
+    	if (!room.checkIn(this, checkout)) {
+    		System.out.println("Could not reserve room, Is it taken?");
+    		return;
+    	}
+    	this.room = room;
     }
 
     //Edit details of a check in
     public void modifyCheckIn()
     {
-    	
+    	//May delete or implement as Needed by James
+    }
+
+    //add a note to the room
+    public void addNote(boolean important, String note)
+    {
+    	if (important == true) {
+    		importantNotes += ", " + note;
+    	}
+    	else {
+    		notes += ", " + note;
+    	}
     }
 
     //
-    public void addNote(boolean important, String note)
-    {
-
-    }
-
     public void requestRoomService()
     {
-
-    }
-
-    public void changeRoomServiceStatus()
-    {
-
+    	
     }
 
     public void generateComplaint()
@@ -115,5 +118,4 @@ public class Customer {
 	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
-
 }
