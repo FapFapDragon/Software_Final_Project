@@ -55,6 +55,5 @@ public class Main {
     	System.out.println(desk.CancelReservation(client1));
     	System.out.println("");
     	
-    	
     }
 }

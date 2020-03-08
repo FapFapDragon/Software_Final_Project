@@ -7,12 +7,12 @@ public class Manager extends Employee{
     //Display stats about the hotel
     public void HotelStats()
     {
-
+    	
     }
 
     public void BuildTickets()
     {
-
+    	
     }
 
     public void GetDiscounts()
@@ -40,14 +40,8 @@ public class Manager extends Employee{
 
     }
     
-	// generate request for supplies
 	public void generateOrderRequest() {
 		// TODO
 	}
 	
-    //Move ticket from active to complete
-    public void CompleteTicket()
-    {
-    	// TODO
-    }
 }

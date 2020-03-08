@@ -12,9 +12,4 @@ public class Housekeeping extends Employee {
 		// TODO
 	}
 	
-    //Move ticket from active to complete
-    public void CompleteTicket()
-    {
-    	// TODO
-    }
 }
