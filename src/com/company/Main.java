@@ -28,8 +28,13 @@ public class Main {
     	System.out.println("checkout only works if your in a room");
     	System.out.println(desk.createReservation(client1, room1, new Date(2020, 12, 12)));
     	System.out.println(desk.createReservation(client2, room1, new Date(2020, 12, 12)));
-    	System.out.println(desk.createReservation(client2, room1, new Date(2020, 12, 12)));    	
+    	System.out.println(desk.createReservation(client2, room1, new Date(2020, 12, 12))); 
+    	System.out.println("");
+
+    	System.out.println("checkout only works if you have a reservation");
+    	System.out.println(desk.CancelReservation(client1));
+    	System.out.println(desk.CancelReservation(client1));
+    	System.out.println("");
     	
-    	System.out.println(room1.getFutureBookings());
     }
 }

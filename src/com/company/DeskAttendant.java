@@ -34,18 +34,23 @@ public class DeskAttendant extends Employee{
     	boolean available = true;
     	Date currDate = new Date();
     	for (Booking reservation : futureReservations) {
-    		if (reservation.getCheckInDate().before(currDate) && reservation.getCheckOutDate().after(currDate) || 
-    			reservation.getCheckInDate().before(checkout) && reservation.getCheckOutDate().after(checkout))
+    		if ((reservation.getCheckInDate().before(currDate) && reservation.getCheckOutDate().after(currDate)) || 
+    				(reservation.getCheckInDate().before(checkout) && reservation.getCheckOutDate().after(checkout)) ||
+    				reservation.getCheckInDate().equals(currDate) || reservation.getCheckOutDate().equals(checkout))
     			available = false;
     	}
     	if (available) {
     		room.reserve(booking);
     		client.setBooking(booking);
+    		return true;
 		}
-		return true;
+    	return false;
 	}
 
 	public boolean CancelReservation(Customer client) {
+		Room checkoutRoom = client.getRoom();
+		if (checkoutRoom == null)
+			return false;
 		client.getRoom().cancelReservation(client.getBooking());
 		client.setBooking(null);
 		return true;
