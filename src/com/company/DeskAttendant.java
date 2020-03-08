@@ -34,6 +34,7 @@ public class DeskAttendant extends Employee {
 		Date currDate = new Date();
 		if (!futureReservations.isEmpty())
 			for (Booking reservation : futureReservations) {
+				System.out.println();
 				if (reservation.getCheckInDate().before(currDate) && reservation.getCheckOutDate().after(currDate)
 						|| reservation.getCheckInDate().before(checkout) && reservation.getCheckOutDate().after(checkout)
 						|| reservation.getCheckInDate().equals(currDate) || reservation.getCheckOutDate().equals(checkout))
