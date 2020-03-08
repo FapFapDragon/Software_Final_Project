@@ -31,6 +31,7 @@ public class Customer {
         this.previousBookings = null;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.complaint = false;
         this.setMembershipActive(false);
         this.membership = null;
         this.setCheckedIn(false);
@@ -72,20 +73,16 @@ public class Customer {
     	}
     }
 
-    //
-    public void requestRoomService()
+    public void generateComplaint(String desciption, int roomID, Date openTime, boolean complete)
     {
-    	
-    }
-
-    public void generateComplaint()
-    {
-
+    	complaintTicket = new ComplaintTicket(desciption, roomID, openTime, complete);
+    	complaint = true;
     }
 
     public void removeComplaint()
     {
-
+    	complaint = false;
+    	complaintTicket.closeTicket();
     }
 
 	public boolean isMembershipActive() {

@@ -3,6 +3,7 @@ package com.company;
 import java.util.Date;
 
 public class ComplaintTicket {
+	private int ticketID;
     private int roomID;
     private Date openTime;
     private boolean complete;
