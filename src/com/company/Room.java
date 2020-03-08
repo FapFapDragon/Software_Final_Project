@@ -1,7 +1,9 @@
 package com.company;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 
 import com.company.Enums.*;
 
@@ -12,10 +14,8 @@ public class Room {
 	private View view;
 	private int floor;
 	private State state; // May use this instead of booleans for reserved or occupied
-	private Customer client;
-	private Date checkInDate;
-	private Date checkOutDate;
-	private List<Date> futureBookings;
+	private Booking booking;
+	private List<Booking> futureBookings;
 	private RoomServiceTicket roomService;
 
 	public Room(int ID, int beds, Size size, View view, int floor) {
@@ -25,41 +25,48 @@ public class Room {
 		this.view = view;
 		this.floor = floor;
 		this.setState(State.CLEAN);
-		this.setClient(null);
-		this.setCheckOutDate(null);
-		this.futureBookings = null;
+		this.setBooking(null);
+		this.setFutureBookings(null);
 		this.setRoomService(null);
 	}
 
-	public boolean checkIn(Customer client, Date checkOutDate) {
+	public boolean checkIn(Booking booking) {
 		if (this.getState() == State.CLEAN) {
-			this.setClient(client);
-			this.setCheckInDate(new Date());
-			this.setCheckOutDate(checkOutDate);
+			this.setBooking(booking);
 			return true;
 		} else
 			return false;
 	}
 
-	public void reserve(Date checkInDate) {
-		futureBookings.add(checkInDate);
+	public void reserve(Booking booking) {
+		futureBookings.add(booking);
 	}
 
-	public List<Date> checkListings() {
+	public List<Booking> checkListings() {
 		return futureBookings;
 	}
 
+	public void cleanListings() {
+		ListIterator<Booking> list = futureBookings.listIterator();
+		Date currDate = new Date();
+		List<Booking> cleanList = Collections.emptyList();
+		while (list.hasNext()) {
+			booking = list.next();
+			if (booking.getCheckInDate().before(currDate))
+				cleanList.add(booking);
+		}
+		this.setFutureBookings(cleanList);
+	}
+
 	public void checkout() {
-		this.setClient(null);
-		this.setCheckInDate(null);
-		this.setCheckOutDate(null);
+		this.booking = null;
 		this.setState(State.PICKUP);
 	}
 
 	public void changeState(State state) {
 		this.state = state;
 	}
-	
+
 	public State getState() {
 		return state;
 	}
@@ -68,35 +75,27 @@ public class Room {
 		this.state = state;
 	}
 
-	public Date getCheckInDate() {
-		return checkInDate;
-	}
-
-	public void setCheckInDate(Date checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-
-	public Customer getClient() {
-		return client;
-	}
-
-	public void setClient(Customer client) {
-		this.client = client;
-	}
-
-	public Date getCheckOutDate() {
-		return checkOutDate;
-	}
-
-	public void setCheckOutDate(Date checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-
 	public RoomServiceTicket getRoomService() {
 		return roomService;
 	}
-
+	
 	public void setRoomService(RoomServiceTicket roomService) {
 		this.roomService = roomService;
+	}
+
+	public Booking getBooking() {
+		return booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+
+	public List<Booking> getFutureBookings() {
+		return futureBookings;
+	}
+
+	public void setFutureBookings(List<Booking> bookings) {
+		this.futureBookings = bookings;
 	}
 }
