@@ -13,7 +13,8 @@ public class Room {
 	private int floor;
 	private State state; // May use this instead of booleans for reserved or occupied
 	private Customer client;
-	private Date checkoutDate;
+	private Date checkInDate
+	private Date checkOutDate;
 	private List<Date> futureBookings;
 	private RoomServiceTicket roomService;
 
@@ -31,24 +32,22 @@ public class Room {
     	this.roomService = null;
     }
 	
-	public void checkIn(Customer client) {
+	public void checkIn(Customer client, Date checkOutDate) {
 		this.client = client;
+		this.checkInDate = new Date();
+		this.checkOutDate = checkOutDate;
 	}
 
 	public void reserve() {
-
+		
 	}
 
 	public List<Date> checkListings() {
 		return futureBookings;
 	}
 
-	public Customer checkClient() {
-		return client;
-	}
-
 	public void checkout() {
-
+		this.client = null;
 	}
 
 }
