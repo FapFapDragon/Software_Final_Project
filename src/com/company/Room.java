@@ -13,7 +13,7 @@ public class Room {
 	private int floor;
 	private State state; // May use this instead of booleans for reserved or occupied
 	private Customer client;
-	private Date checkInDate
+	private Date checkInDate;
 	private Date checkOutDate;
 	private List<Date> futureBookings;
 	private RoomServiceTicket roomService;
