@@ -1,6 +1,6 @@
 package com.company;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Booking {
 	private Customer client;

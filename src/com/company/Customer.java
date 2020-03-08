@@ -7,11 +7,11 @@ public class Customer {
     private int ID;
     private boolean membershipActive;
     private Membership membership;
-    private Room room; //room being stayed in
+    private Booking booking; //room being stayed in
     private boolean checkedIn;
     private Date checkInDate;
     private Date lastVisit;
-    private List<Room> previousRooms;
+    private List<Booking> previousBookings;
     private int phoneNumber;
     private String address;
     //Didn't add credit card info as was told by hotels that they don't store any information on payments
@@ -24,17 +24,16 @@ public class Customer {
     private WakeUpTimer wakeUpTimer;
 
 
-    public Customer(int ID, Date lastVisit, List<Room> previousRooms, int phoneNumber, String address)
+    public Customer(int ID, int phoneNumber, String address)
     {
         this.ID = ID;
-        this.lastVisit = lastVisit;
-        this.previousRooms = previousRooms;
+        this.lastVisit = null;
+        this.previousBookings = null;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.setMembershipActive(false);
         this.membership = null;
         this.setCheckedIn(false);
-        this.setRoom(null);
     }
 
     //Add membership
@@ -44,24 +43,16 @@ public class Customer {
     }
 
     //Check person into room
-    public void checkIn(Room room, Date checkoutDate)
+    public boolean checkIn(Booking booking)
     {
-    	checkedIn = room.checkIn(this, checkoutDate);
-    	if (!checkedIn) {
-    		System.out.println("Could not reserve room, Is it taken?");
-    		return;
-    	}
-    	this.room = room;
+    	this.setBooking(booking);
+    	return true;
     }
     
-    public void checkOut()
+    public boolean checkOut()
     {
-    	checkedIn = !room.checkOut();
-    	if (checkedIn) {
-    		System.out.println("Could not check out of room");
-    		return;
-    	}
-    	this.room = null;
+    	this.setBooking(null);
+    	return true;
     }
 
     //Edit details of a check in
@@ -105,12 +96,12 @@ public class Customer {
 		this.membershipActive = membershipActive;
 	}
 
-	public Room getRoom() {
-		return room;
+	public Booking getBooking() {
+		return booking;
 	}
 
-	public void setRoom(Room room) {
-		this.room = room;
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 
 	public boolean isCheckedIn() {
@@ -127,5 +118,9 @@ public class Customer {
 
 	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
+	}
+	
+	public Room getRoom() {
+		return this.getBooking().getRoom();
 	}
 }

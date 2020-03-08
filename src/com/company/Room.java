@@ -41,26 +41,42 @@ public class Room {
 	public void reserve(Booking booking) {
 		futureBookings.add(booking);
 	}
+	
+	public void cancelReservation(Booking booking) {
+		ListIterator<Booking> list = futureBookings.listIterator();
+		List<Booking> cleanList = Collections.emptyList();
+		while (list.hasNext()) {
+			if (!list.next().equals(booking)) {
+				cleanList.add(booking);
+			}
+		}
+		this.setFutureBookings(cleanList);
+	}
 
 	public List<Booking> checkListings() {
 		return futureBookings;
 	}
 
-	public void cleanListings() {
+	public void reservationHandler() {
 		ListIterator<Booking> list = futureBookings.listIterator();
 		Date currDate = new Date();
 		List<Booking> cleanList = Collections.emptyList();
 		while (list.hasNext()) {
 			booking = list.next();
+			if (booking.getCheckInDate().equals(currDate) && this.getState() == State.CLEAN) {
+				this.setBooking(booking);
+				this.setState(State.DIRTY);
+			}
 			if (booking.getCheckInDate().before(currDate))
 				cleanList.add(booking);
 		}
 		this.setFutureBookings(cleanList);
 	}
 
-	public void checkout() {
+	public boolean checkout() {
 		this.booking = null;
 		this.setState(State.PICKUP);
+		return true;
 	}
 
 	public void changeState(State state) {
