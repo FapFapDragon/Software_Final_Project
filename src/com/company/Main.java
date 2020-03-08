@@ -12,6 +12,7 @@ public class Main {
     	Customer client1 = new Customer(1, 1234567, "address");
     	Customer client2 = new Customer(2, 1234567, "address");
     	Room room1 = new Room(1, 1, Size.KING, View.CITY, 1);
+    	Ticket ct = new CleaningTicket("desc", 1, new Date(), false);
     	
     	System.out.println("can only add one client to a room");
     	System.out.println(desk.checkIn(client1, room1, new Date(2000, 12, 12)));
@@ -35,6 +36,25 @@ public class Main {
     	System.out.println(desk.CancelReservation(client1));
     	System.out.println(desk.CancelReservation(client1));
     	System.out.println("");
+    	
+    	System.out.println("previous visits should be stored");
+    	System.out.println(desk.checkIn(client1, room1, new Date(2020, 12, 12)));
+    	System.out.println(desk.checkOut(client1));
+    	room1.changeState(State.CLEAN);	//room has to be in clean state to be used
+    	System.out.println(desk.checkIn(client1, room1, new Date(2020, 12, 12)));
+    	System.out.println(desk.checkOut(client1));
+    	System.out.println(client1.getPreviousBooking().size());
+    	System.out.println("");
+    	
+    	System.out.println("closing a ticket");
+    	desk.CompleteTicket(ct);
+    	System.out.println(ct.complete);
+    	System.out.print("");
+    	
+    	System.out.println("creating a ticket");
+    	System.out.println(desk.CancelReservation(client1));
+    	System.out.println("");
+    	
     	
     }
 }

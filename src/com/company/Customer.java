@@ -52,9 +52,7 @@ public class Customer {
     
     public boolean checkOut()
     {
-    	ArrayList<Booking> previousBooking = this.getPreviousBooking();
-    	previousBooking.add(this.getBooking());
-    	this.setPreviousBooking(previousBooking);
+    	this.previousBookings.add(booking);
     	this.setBooking(null);
     	return true;
     }
