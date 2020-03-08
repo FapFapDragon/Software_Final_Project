@@ -38,20 +38,30 @@ public class Customer {
     }
 
     //Add membership
-    public void addMembership()
+    public void addMembership(Membership membership)
     {
-    	//membership = Pull from database;
+    	this.membership = membership;
     }
 
     //Check person into room
-    public void checkIn(Room room, Date checkout)
+    public void checkIn(Room room, Date checkoutDate)
     {
-    	
-    	if (!room.checkIn(this, checkout)) {
+    	checkedIn = room.checkIn(this, checkoutDate);
+    	if (!checkedIn) {
     		System.out.println("Could not reserve room, Is it taken?");
     		return;
     	}
     	this.room = room;
+    }
+    
+    public void checkOut()
+    {
+    	checkedIn = !room.checkOut();
+    	if (checkedIn) {
+    		System.out.println("Could not check out of room");
+    		return;
+    	}
+    	this.room = null;
     }
 
     //Edit details of a check in
