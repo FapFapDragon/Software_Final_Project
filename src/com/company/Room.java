@@ -39,7 +39,7 @@ public class Room {
 	}
 
 	public void reserve(Date checkInDate) {
-		futureBookings.add(checkInDate)
+		futureBookings.add(checkInDate);
 	}
 
 	public List<Date> checkListings() {
