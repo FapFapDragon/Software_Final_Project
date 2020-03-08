@@ -15,9 +15,9 @@ public class Room {
     private List<Date> futureBookings;
     private RoomServiceTicket roomService;
 
-    public void createRoom()
+    public Room()
     {
-
+    	
     }
 
     public void addBed()
