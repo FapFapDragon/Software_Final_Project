@@ -2,13 +2,16 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class Maintenance {
+public class Maintenance extends Employee{
     static private ArrayList<MaintenanceTicket> tickets;
-
+    
+    
+   
     //Move ticket from active to complete
-    public void CompleteTicket(MaintenanceTicket ticket)
+    @Override
+    public void CompleteTicket(Ticket ticket)
     {
-    		ticket.setComplete(true);
+    		ticket.closeTicket();
     }
 
     //generate request for supplies
@@ -16,4 +19,6 @@ public class Maintenance {
     {
     	
     }
+
+	
 }

@@ -3,10 +3,10 @@ package com.company;
 import java.util.List;
 
 abstract class Employee {
-    private int permissionLevel;
+    private int permissionLevel; //0 for front desk, 1 for housekeeping, 2 for kitchen staff, 3 for maintenance staff
     private String name;
     private String ID;
-    private String role;
+    private String role; 
     private List<Shift> shifts; //maybe only store shifts in sql, no need to store in program
     private float wage;
     static private List<OrderRequest> orders; //Shared among all employees
@@ -23,11 +23,17 @@ abstract class Employee {
 	public float getWage() {
 		return wage;
 	}
+	
 	public void setWage(float wage) {
 		this.wage = wage;
 	}
 	
 	public abstract void generateOrderRequest();
-	public abstract void CompleteTicket();
+	
+	public void CompleteTicket(Ticket ticket) {
+		// TODO Auto-generated method stub
+		ticket.closeTicket();
+		
+	}
     
 }

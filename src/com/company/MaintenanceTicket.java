@@ -1,39 +1,11 @@
 package com.company;
 
-public class MaintenanceTicket {
-    private int roomID;
-    private String description;
-    private boolean complete;
+import java.util.Date;
 
-    public MaintenanceTicket(int roomID, boolean complete, String description) 
-    {
-    	this.roomID = roomID;
-    	this.complete = complete;
-    	this.description = description;
-    }
-    
-    public int getRoomID() {
-		return roomID;
-	}
+public class MaintenanceTicket extends Ticket {
 	
-	public void setRoomID(int roomID) {
-		this.roomID = roomID;
-	}
-
-	public boolean isComplete() {
-		return complete;
-	}
-
-	public void setComplete(boolean complete) {
-		this.complete = complete;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-    
+    public MaintenanceTicket(String desciption, int roomID, Date openTime, boolean completed) 
+    {
+    	super(desciption, roomID, openTime, completed);
+    }
 }

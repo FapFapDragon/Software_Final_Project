@@ -5,10 +5,10 @@ import java.util.Date;
 public class Shift {
     private String userID;
     private Date date;
-    private String time;
+    private float time;
     private boolean changed;
     
-    public Shift(String userID, Date date, String time) {
+    public Shift(String userID, Date date, float time) {
     	this.userID = userID;
     	this.date = date;
     	this.time = time;
