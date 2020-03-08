@@ -8,7 +8,7 @@ public class Housekeeping extends Employee {
     static private ArrayList<CleaningTicket> activeTickets;
 
     //Move ticket from active to complete
-    public void CompleteTicket()
+    public void CompleteTicket(CleaningTicket ticket)
     {
 
     }

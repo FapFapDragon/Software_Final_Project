@@ -1,10 +1,10 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class DeskAttendant extends Employee {
-	private static List<ComplaintTicket> complaints;
+public class DeskAttendant extends Employee{
+    private static ArrayList<ComplaintTicket> complaints;
 
 	public Boolean checkIn(Customer client, Room room, Date checkout) {
 		Booking booking = new Booking(client, room, new Date(), checkout);
@@ -22,27 +22,25 @@ public class DeskAttendant extends Employee {
 		return true;
 	}
 
-	public void upgradeRoom(Customer client, Room room, Date checkout) {
-		this.checkOut(client);
-		this.checkIn(client, room, checkout);
-	}
-
-	public boolean createReservation(Customer client, Room room, Date checkout) {
-		Booking booking = new Booking(client, room, new Date(), checkout);
-		List<Booking> futureReservations = room.getFutureBookings();
-		boolean available = true;
-		Date currDate = new Date();
-		if (!futureReservations.isEmpty())
-			for (Booking reservation : futureReservations) {
-				System.out.println();
-				if (reservation.getCheckInDate().before(currDate) && reservation.getCheckOutDate().after(currDate)
-						|| reservation.getCheckInDate().before(checkout) && reservation.getCheckOutDate().after(checkout)
-						|| reservation.getCheckInDate().equals(currDate) || reservation.getCheckOutDate().equals(checkout))
-					available = false;
-			}
-		if (available) {
-			room.reserve(booking);
-			client.setBooking(booking);
+    public void upgradeRoom(Customer client, Room room, Date checkout)
+    {
+    	this.checkOut(client);
+    	this.checkIn(client, room, checkout);
+    }
+    
+    public boolean createReservation(Customer client, Room room, Date checkout) {
+    	Booking booking = new Booking(client, room, new Date(), checkout);
+    	ArrayList<Booking> futureReservations = room.getFutureBookings();
+    	boolean available = true;
+    	Date currDate = new Date();
+    	for (Booking reservation : futureReservations) {
+    		if (reservation.getCheckInDate().before(currDate) && reservation.getCheckOutDate().after(currDate) || 
+    			reservation.getCheckInDate().before(checkout) && reservation.getCheckOutDate().after(checkout))
+    			available = false;
+    	}
+    	if (available) {
+    		room.reserve(booking);
+    		client.setBooking(booking);
 		}
 		return true;
 	}

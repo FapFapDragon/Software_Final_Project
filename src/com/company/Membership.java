@@ -1,16 +1,16 @@
 package com.company;
 
 import java.util.Date;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Membership {
     private String type;
-    private List<String> perks;
+    private ArrayList<String> perks;
     private int level;
     private Date expiration;
 
     //Constructor
-    public Membership(String type, List<String> perks, int level, Date expiration) {
+    public Membership(String type, ArrayList<String> perks, int level, Date expiration) {
         this.type = type;
         this.setPerks(perks);
         this.setLevel(level);
@@ -27,11 +27,11 @@ public class Membership {
     	type = null;
     }
     
-	public List<String> getPerks() {
+	public ArrayList<String> getPerks() {
 		return perks;
 	}
 
-	public void setPerks(List<String> perks) {
+	public void setPerks(ArrayList<String> perks) {
 		this.perks = perks;
 	}
 
