@@ -39,4 +39,15 @@ public class Manager extends Employee{
     {
 
     }
+    
+	// generate request for supplies
+	public void generateOrderRequest() {
+		// TODO
+	}
+	
+    //Move ticket from active to complete
+    public void CompleteTicket()
+    {
+    	// TODO
+    }
 }
