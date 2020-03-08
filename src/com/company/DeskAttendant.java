@@ -1,10 +1,10 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class DeskAttendant extends Employee{
-    private static List<ComplaintTicket> complaints;
+    private static ArrayList<ComplaintTicket> complaints;
 
     public Boolean checkIn(Customer client, Room room, Date checkout)
     {
@@ -29,7 +29,7 @@ public class DeskAttendant extends Employee{
     
     public boolean createReservation(Customer client, Room room, Date checkout) {
     	Booking booking = new Booking(client, room, new Date(), checkout);
-    	List<Booking> futureReservations = room.getFutureBookings();
+    	ArrayList<Booking> futureReservations = room.getFutureBookings();
     	boolean available = true;
     	Date currDate = new Date();
     	for (Booking reservation : futureReservations) {

@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.ListIterator;
 
 import com.company.Enums.*;
@@ -15,7 +15,7 @@ public class Room {
 	private int floor;
 	private State state; // May use this instead of booleans for reserved or occupied
 	private Booking booking;
-	private List<Booking> futureBookings;
+	private ArrayList<Booking> futureBookings;
 	private RoomServiceTicket roomService;
 
 	public Room(int ID, int beds, Size size, View view, int floor) {
@@ -43,34 +43,34 @@ public class Room {
 	}
 	
 	public void cancelReservation(Booking booking) {
-		ListIterator<Booking> list = futureBookings.listIterator();
-		List<Booking> cleanList = Collections.emptyList();
-		while (list.hasNext()) {
-			if (!list.next().equals(booking)) {
-				cleanList.add(booking);
+		ArrayListIterator<Booking> ArrayList = futureBookings.ListIterator();
+		ArrayList<Booking> cleanArrayList = Collections.emptyArrayList();
+		while (ArrayList.hasNext()) {
+			if (!ArrayList.next().equals(booking)) {
+				cleanArrayList.add(booking);
 			}
 		}
-		this.setFutureBookings(cleanList);
+		this.setFutureBookings(cleanArrayList);
 	}
 
-	public List<Booking> checkListings() {
+	public ArrayList<Booking> checkArrayListings() {
 		return futureBookings;
 	}
 
 	public void reservationHandler() {
-		ListIterator<Booking> list = futureBookings.listIterator();
+		ArrayListIterator<Booking> ArrayList = futureBookings.ArrayListIterator();
 		Date currDate = new Date();
-		List<Booking> cleanList = Collections.emptyList();
-		while (list.hasNext()) {
-			booking = list.next();
+		ArrayList<Booking> cleanArrayList = Collections.emptyArrayList();
+		while (ArrayList.hasNext()) {
+			booking = ArrayList.next();
 			if (booking.getCheckInDate().equals(currDate) && this.getState() == State.CLEAN) {
 				this.setBooking(booking);
 				this.setState(State.DIRTY);
 			}
 			if (booking.getCheckInDate().before(currDate))
-				cleanList.add(booking);
+				cleanArrayList.add(booking);
 		}
-		this.setFutureBookings(cleanList);
+		this.setFutureBookings(cleanArrayList);
 	}
 
 	public boolean checkout() {
@@ -107,11 +107,11 @@ public class Room {
 		this.booking = booking;
 	}
 
-	public List<Booking> getFutureBookings() {
+	public ArrayList<Booking> getFutureBookings() {
 		return futureBookings;
 	}
 
-	public void setFutureBookings(List<Booking> bookings) {
+	public void setFutureBookings(ArrayList<Booking> bookings) {
 		this.futureBookings = bookings;
 	}
 }
