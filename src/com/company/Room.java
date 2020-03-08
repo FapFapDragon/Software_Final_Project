@@ -1,8 +1,8 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.ListIterator;
 
 import com.company.Enums.*;
@@ -15,7 +15,7 @@ public class Room {
 	private int floor;
 	private State state; // May use this instead of booleans for reserved or occupied
 	private Booking booking;
-	private List<Booking> futureBookings;
+	private ArrayList<Booking> futureBookings;
 	private RoomServiceTicket roomService;
 
 	public Room(int ID, int beds, Size size, View view, int floor) {
@@ -26,13 +26,14 @@ public class Room {
 		this.floor = floor;
 		this.setState(State.CLEAN);
 		this.setBooking(null);
-		this.setFutureBookings(null);
+		this.setFutureBookings(new ArrayList<Booking>());
 		this.setRoomService(null);
 	}
 
 	public boolean checkIn(Booking booking) {
 		if (this.getState() == State.CLEAN) {
 			this.setBooking(booking);
+			this.setState(State.DIRTY);
 			return true;
 		} else
 			return false;
@@ -44,7 +45,7 @@ public class Room {
 	
 	public void cancelReservation(Booking booking) {
 		ListIterator<Booking> list = futureBookings.listIterator();
-		List<Booking> cleanList = Collections.emptyList();
+		ArrayList<Booking> cleanList = new ArrayList<Booking>();
 		while (list.hasNext()) {
 			if (!list.next().equals(booking)) {
 				cleanList.add(booking);
@@ -53,14 +54,14 @@ public class Room {
 		this.setFutureBookings(cleanList);
 	}
 
-	public List<Booking> checkListings() {
+	public ArrayList<Booking> checkListings() {
 		return futureBookings;
 	}
 
 	public void reservationHandler() {
 		ListIterator<Booking> list = futureBookings.listIterator();
 		Date currDate = new Date();
-		List<Booking> cleanList = Collections.emptyList();
+		ArrayList<Booking> cleanList = new ArrayList<Booking>();
 		while (list.hasNext()) {
 			booking = list.next();
 			if (booking.getCheckInDate().equals(currDate) && this.getState() == State.CLEAN) {
@@ -107,11 +108,11 @@ public class Room {
 		this.booking = booking;
 	}
 
-	public List<Booking> getFutureBookings() {
+	public ArrayList<Booking> getFutureBookings() {
 		return futureBookings;
 	}
 
-	public void setFutureBookings(List<Booking> bookings) {
+	public void setFutureBookings(ArrayList<Booking> bookings) {
 		this.futureBookings = bookings;
 	}
 }
