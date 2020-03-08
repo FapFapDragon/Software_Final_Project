@@ -76,13 +76,16 @@ public class DeskAttendant extends Employee{
 		client.setWakeUpTimer(wakeup);
 	}
 
-	public void GenerateMaintenanceTicket() {
-		// TODO
-	}
-
 	// generate request for supplies
 	public void generateOrderRequest() {
 		// TODO
 	}
+	
+    //Move ticket from active to complete
+    public void CompleteTicket()
+    {
+    	// TODO
+    }
+
 
 }

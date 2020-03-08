@@ -10,12 +10,12 @@ public class Housekeeping extends Employee {
     //Move ticket from active to complete
     public void CompleteTicket(CleaningTicket ticket)
     {
-
+    	// TODO
     }
 
     //generate request for supplies
     public void generateOrderRequest()
     {
-
+    	// TODO
     }
 }

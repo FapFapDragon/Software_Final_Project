@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.List;
 
-public class Employee {
+abstract class Employee {
     private int permissionLevel;
     private String name;
     private String ID;
@@ -26,5 +26,8 @@ public class Employee {
 	public void setWage(float wage) {
 		this.wage = wage;
 	}
+	
+	public abstract void generateOrderRequest();
+	public abstract void CompleteTicket();
     
 }
