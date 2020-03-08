@@ -120,4 +120,12 @@ public class Customer {
 	public Room getRoom() {
 		return this.getBooking().getRoom();
 	}
+
+	public WakeUpTimer getWakeUpTimer() {
+		return wakeUpTimer;
+	}
+
+	public void setWakeUpTimer(WakeUpTimer wakeUpTimer) {
+		this.wakeUpTimer = wakeUpTimer;
+	}
 }
