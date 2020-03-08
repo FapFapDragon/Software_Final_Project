@@ -18,9 +18,6 @@ public class Customer {
     private String notes;
     private String importantNotes;
 
-    private boolean roomService;
-    private RoomServiceTicket RS;
-
     private boolean complaint;
     private ComplaintTicket complaintTicket;
 
@@ -34,43 +31,50 @@ public class Customer {
         this.previousRooms = previousRooms;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.membershipActive = false;
+        this.setMembershipActive(false);
         this.membership = null;
-        this.checkedIn = false;
-        this.room = null;
+        this.setCheckedIn(false);
+        this.setRoom(null);
     }
 
     //Add membership
     public void addMembership()
     {
-
+    	//membership = Pull from database;
     }
 
     //Check person into room
-    public void checkIn(Room room)
+    public void checkIn(Room room, Date checkout)
     {
-
+    	
+    	if (!room.checkIn(this, checkout)) {
+    		System.out.println("Could not reserve room, Is it taken?");
+    		return;
+    	}
+    	this.room = room;
     }
 
+    //Edit details of a check in
     public void modifyCheckIn()
     {
-
-
+    	//May delete or implement as Needed by James
     }
 
+    //add a note to the room
     public void addNote(boolean important, String note)
     {
-
+    	if (important == true) {
+    		importantNotes += ", " + note;
+    	}
+    	else {
+    		notes += ", " + note;
+    	}
     }
 
+    //
     public void requestRoomService()
     {
-
-    }
-
-    public void changeRoomServiceStatus()
-    {
-
+    	
     }
 
     public void generateComplaint()
@@ -83,4 +87,35 @@ public class Customer {
 
     }
 
+	public boolean isMembershipActive() {
+		return membershipActive;
+	}
+
+	public void setMembershipActive(boolean membershipActive) {
+		this.membershipActive = membershipActive;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public boolean isCheckedIn() {
+		return checkedIn;
+	}
+
+	public void setCheckedIn(boolean checkedIn) {
+		this.checkedIn = checkedIn;
+	}
+
+	public Date getCheckInDate() {
+		return checkInDate;
+	}
+
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
+	}
 }
