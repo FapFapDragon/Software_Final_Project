@@ -121,6 +121,8 @@ public class Customer {
 	}
 	
 	public Room getRoom() {
+		if (this.getBooking() == null)
+			return null;
 		return this.getBooking().getRoom();
 	}
 
