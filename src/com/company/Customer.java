@@ -1,7 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Customer {
     private int ID;
@@ -11,7 +11,7 @@ public class Customer {
     private boolean checkedIn;
     private Date checkInDate;
     private Date lastVisit;
-    private List<Booking> previousBookings;
+    private ArrayList<Booking> previousBookings;
     private int phoneNumber;
     private String address;
     //Didn't add credit card info as was told by hotels that they don't store any information on payments
@@ -28,7 +28,7 @@ public class Customer {
     {
         this.ID = ID;
         this.lastVisit = null;
-        this.previousBookings = null;
+        this.previousBookings = new ArrayList<Booking>();
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.complaint = false;
@@ -52,6 +52,9 @@ public class Customer {
     
     public boolean checkOut()
     {
+    	ArrayList<Booking> previousBooking = this.getPreviousBooking();
+    	previousBooking.add(this.getBooking());
+    	this.setPreviousBooking(previousBooking);
     	this.setBooking(null);
     	return true;
     }
@@ -129,5 +132,13 @@ public class Customer {
 
 	public void setWakeUpTimer(WakeUpTimer wakeUpTimer) {
 		this.wakeUpTimer = wakeUpTimer;
+	}
+
+	public ArrayList<Booking> getPreviousBooking() {
+		return previousBookings;
+	}
+
+	public void setPreviousBooking(ArrayList<Booking> previousBookings) {
+		this.previousBookings = previousBookings;
 	}
 }
