@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.Date;
 
+
 public class Booking {
 	private int ID;
 	private Customer client;
