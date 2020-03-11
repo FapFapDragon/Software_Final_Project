@@ -4,12 +4,14 @@ import java.sql.*;
  
 import java.util.Date;
 
+
 import com.company.Enums.*;
 public class Main {
 
     @SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 	// write your code here
+    	/*
     	DeskAttendant desk = new DeskAttendant();
     	Customer client1 = new Customer(1, 1234567, "address");
     	Customer client2 = new Customer(2, 1234567, "address");
@@ -56,6 +58,7 @@ public class Main {
     	System.out.println("creating a ticket");
     	System.out.println(desk.CancelReservation(client1));
     	System.out.println("");
-    	
+    	*/
+    	HotelDB.getCustomer(1234, "john", 5194971377L);
     }
 }
