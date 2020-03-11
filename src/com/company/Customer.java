@@ -12,7 +12,7 @@ public class Customer {
     private Date checkInDate;
     private Date lastVisit;
     private ArrayList<Booking> previousBookings;
-    private int phoneNumber;
+    private long phoneNumber;
     private String address;
     //Didn't add credit card info as was told by hotels that they don't store any information on payments
     private String notes;
@@ -24,7 +24,7 @@ public class Customer {
     private WakeUpTimer wakeUpTimer;
 
 
-    public Customer(int ID, int phoneNumber, String address)
+    public Customer(int ID, long phoneNumber, String address)
     {
         this.ID = ID;
         this.lastVisit = null;
