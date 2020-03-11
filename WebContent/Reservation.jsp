@@ -50,7 +50,7 @@
 <body>
 
   <div class="hero-image-small">
-    <img src="logo.png" class="marginauto">
+      <img src="img/logo.png" class="marginauto">
   </div>
 
 
