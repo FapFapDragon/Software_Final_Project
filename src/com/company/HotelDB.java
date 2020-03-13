@@ -27,18 +27,21 @@ public class HotelDB {
 	}
 	
 	public static void getCustomer(int ID, String address, long phonenumber) {
-		String query = "SELECT VERSION()";
+		String query = "SELECT * FROM customer;";
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		
+		/*
+		  	USE hotel;
+			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
+			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
+		 */
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
-
+            Customer cx;
             if (rs.next()) {
-                
-                System.out.println(rs.getString(1));
+                System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
             }
 		}
 		catch (Exception e) {

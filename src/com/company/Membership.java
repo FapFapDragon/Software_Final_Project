@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.ArrayList;
 
 public class Membership {
+	private int ID;
     private String type;
     private ArrayList<String> perks;
     private int level;
