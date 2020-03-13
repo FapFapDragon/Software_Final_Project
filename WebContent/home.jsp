@@ -28,7 +28,7 @@ $(function(){$("#nav-holder").load("nav.jsp");});
 
 
 <body>
-  <div class="hero-image">
+  <div class="hero-image" style= "background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("homeHero.jpeg")">
     <div class="hero-text">
       <h1 style="font-size:3.5vw;">Superior In Every Way </h1>
       <h4 style="font-size:1.5vw;">Experience The Largest Lake In The World</h4>

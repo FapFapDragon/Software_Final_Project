@@ -20,17 +20,19 @@
 <link rel="stylesheet" type="text/css" href="WebStyle.css">
 
 <%@include file="nav.jsp"%>
-  <% printMenu(); %>
     <div id="PeopleTableContainer" style="width: 800px;"></div>
 </head>
-
+  <div id="nav-holder"></div>
+  <script>
+    $(function () { $("#nav-holder").load("nav.jsp"); });
+  </script>
  
 </head>
 
 <body>
 
   <div class="hero-image-small">
-      <img src="logo.png" class="marginauto">
+      <img src="img/logo.png" class="marginauto">
     </div>
   </div>
 
