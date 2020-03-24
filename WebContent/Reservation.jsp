@@ -84,7 +84,7 @@
             </div>
           </div>
         </div>
-        <form action="DisplayRooms.jsp" method="get">
+        <form action="ReserveDisplayRooms.jsp" method="get">
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
       </div>

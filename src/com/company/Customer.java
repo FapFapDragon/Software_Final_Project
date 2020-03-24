@@ -58,7 +58,7 @@ public class Customer {
     }
 
     //Edit details of a check in
-    public void modifyCheckIn()
+    public void modifyCheckIn() 
     {
     	//May delete or implement as Needed by James
     }

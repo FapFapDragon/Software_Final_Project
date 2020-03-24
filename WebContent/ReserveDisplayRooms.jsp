@@ -38,7 +38,6 @@
 	<div class="hero-image-small">
       <img src="img/logo.png" class="marginauto">
 	</div>
-	</div>
 	<br>
 	<br>
 	<div class="container">
@@ -59,15 +58,14 @@
 
 				<!-- Card content -->
 				<div class="card-body">
-
+ 
 					<!-- Title -->
 					<h4 class="card-title">Card title</h4>
 					<!-- Text -->
 					<p class="card-text">Some quick example text to build on the
 						card title and make up the bulk of the card's content.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-					<button type="button" class="btn btn-primary btn-md">Read
-						more</button>
+        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -95,8 +93,7 @@
 					<p class="card-text">Some quick example text to build on the
 						card title and make up the bulk of the card's content.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-					<button type="button" class="btn btn-primary btn-md">Read
-						more</button>
+        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -125,8 +122,10 @@
 					<p class="card-text">Some quick example text to build on the
 						card title and make up the bulk of the card's content.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-					<button type="button" class="btn btn-primary btn-md">Read
-						more</button>
+				
+        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+
+					
 
 				</div>
 				<!-- Card content -->
@@ -134,7 +133,7 @@
 			</div>
 			<!-- Card -->
 
-		</div>
+		</div>  
 		<!-- Card group -->
 		<!-- Card group -->
 		<div class="card-group">
@@ -160,8 +159,7 @@
 					<p class="card-text">Some quick example text to build on the
 						card title and make up the bulk of the card's content.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-					<button type="button" class="btn btn-primary btn-md">Read
-						more</button>
+        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -189,8 +187,7 @@
 					<p class="card-text">Some quick example text to build on the
 						card title and make up the bulk of the card's content.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-					<button type="button" class="btn btn-primary btn-md">Read
-						more</button>
+        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -219,8 +216,7 @@
 					<p class="card-text">Some quick example text to build on the
 						card title and make up the bulk of the card's content.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-					<button type="button" class="btn btn-primary btn-md">Read
-						more</button>
+        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->

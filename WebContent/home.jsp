@@ -108,7 +108,6 @@ $(function(){$("#nav-holder").load("nav.jsp");});
   $(window).scroll(function () {
     if ($(document).scrollTop() > 50) {
       $('.nav').addClass('affix');
-      console.log("OK");
     } else {
       $('.nav').removeClass('affix');
     }

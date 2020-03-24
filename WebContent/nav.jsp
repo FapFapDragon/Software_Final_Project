@@ -33,7 +33,7 @@
 		}
 	});
 </script>
-<div class="d-none d-lg-block">
+<div class="d-none d-lg-block"> 
 
 	<nav class="nav">
 		<div class="container">
@@ -45,9 +45,17 @@
 					<li><a href="#">About</a></li>
 					<li><a href="Membership.jsp">Membership</a></li>
 					<li><a href="Reservation.jsp">Reserve</a></li>
-					<li><a href=<%= Access.locationOfWebsite %>><c:if test="${Access.testInt  == 0}">
-				 	test2
-				</c:if></a></li>
+					<c:if test="${Access.loggedIn  == 0}">
+					<li><a href="Login.jsp">Login</a></li>
+					</c:if>
+					<c:if test="${Access.loggedIn == 1}">
+					<li><a href="Login.jsp">My Account</a></li>
+					</c:if>
+					<c:if test="${Access.loggedIn == 2}">
+					<li><a href="Login.jsp">Tickets</a></li>
+					<li><a href="Employee.jsp">Account</a></li>
+					</c:if>
+				</a></li>
 				
 				</ul>
 			</div>
