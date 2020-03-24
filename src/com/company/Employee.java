@@ -3,7 +3,7 @@ package com.company;
 import java.util.List;
 
 abstract class Employee {
-    private int permissionLevel; //0 for front desk, 1 for housekeeping, 2 for kitchen staff, 3 for maintenance staff
+    private int PermissionType; //0 for front desk, 1 for housekeeping, 2 for kitchen staff, 3 for maintenance staff
     private String name;
     private String ID;
     private String role; 
