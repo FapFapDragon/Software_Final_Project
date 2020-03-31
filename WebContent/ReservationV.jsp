@@ -53,70 +53,33 @@
       <img src="img/logo.png" class="marginauto">
   </div>
 
-
-  <div class="container">
-    <h1 style="font-family: Arial;">
-      Select Check In Information
-    </h1>
-    <div class="panel panel-primary">
-      <div class="panel-body">
-        <div class="row">
-          <div class='col-md-6'>
-            <div class="form-group">
-              <label class="control-label" style="font-family: Arial;">Arrival Date</label>
-              <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div class='col-md-6'>
-            <div class="form-group">
-              <label class="control-label" style="font-family: Arial;">Checkout Date</label>
-              <div class='input-group date' id='datetimepicker2'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <form action="ReserveDisplayRooms.jsp" method="get">
-        <input type="submit" class="btn btn-primary" value="Submit">
-      </form>
-      </div>
-    </div>
-    
+  <ul class="list-group container">
     <br>
-    <br>     <h1 style="font-family: Arial;">
-      Other Reservations
-    </h1>
-    <div class="row ">
+    <h1 style="font-family: Arial;">
+      VollyBall Court Reservation
+    </h1> 
+    <br><br><hr>
 
-      <div class="col-lg-4 col-md-4 col-xs-4 thumb">
-          <a class="thumbnail" href="ReservationB.jsp">
-              <img class="img-responsive" src="img/reserveBanq.png" alt="">
-          </a> 
-      </div>
-      <div class="col-lg-4 col-md-4 col-xs-4 thumb">
-          <a class="thumbnail" href="ReservationR.jsp"> 
-              <img class="img-responsive" src="img/reserveRestaurant.png" alt="">
-          </a>
-      </div>
-      <div class="col-lg-4 col-md-4 col-xs-4 thumb">
-          <a class="thumbnail" href="ReservationV.jsp">
-              <img class="img-responsive" src="img/reserveVolly.png" alt="">
-          </a>
-      </div>
-    </div>
-  </div>
+  <h1 style="font-family: Arial;">
+    June 29th
+  </h1> 
+    <li class="list-group-item list-group-item-success">9:00 - 11:00</li>
+    <li class="list-group-item list-group-item-danger">11:00 - 1:00 </li>
+    <li class="list-group-item list-group-item-success">1:00 - 3:00</li>
+    <li class="list-group-item list-group-item-success">3:00 - 5:00</li>
+    <li class="list-group-item list-group-item-success">5:00 - 7:00</li>
 
-    
-    
-  </div>
+    <h1 style="font-family: Arial;">
+      June 30th
+    </h1> 
+      <li class="list-group-item list-group-item-success">9:00 - 11:00</li>
+      <li class="list-group-item list-group-item-success">11:00 - 1:00 </li>
+      <li class="list-group-item list-group-item-danger">1:00 - 3:00</li>
+      <li class="list-group-item list-group-item-danger">3:00 - 5:00</li>
+      <li class="list-group-item list-group-item-success">5:00 - 7:00</li>
+
+  </ul>
+
 
   <!--Navigation bar-->
   <div id="footer-holder"></div>

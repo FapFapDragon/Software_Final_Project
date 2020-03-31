@@ -48,7 +48,7 @@ $(function(){$("#nav-holder").load("nav.jsp");});
       <div class="col-md-12">
         <img src="img/swim.jpg" alt="test" class="img-fluid">
         <div class="carousel-caption">
-          <h1 style="z-index: -2;">Example headline.</h1>
+          <h1 style="z-index: -2;">Explore The Lake.</h1>
         </div>
       </div>
     </div>
@@ -57,13 +57,13 @@ $(function(){$("#nav-holder").load("nav.jsp");});
       <div class="col-md-6">
         <img src="img/kayaking.jpg" alt="test" class="img-fluid">
         <div class="carousel-caption">
-          <h2>Example headline.</h2>
+          <h2>See the sunset like never before.</h2>
         </div>
       </div>
       <div class="col-md-6">
         <img src="img/indoors.jpg" alt="test" class="img-fluid">
         <div class="carousel-caption">
-          <h2>Example headline.</h2>
+          <h2>Home away from home.</h2>
         </div>
       </div>
     </div>

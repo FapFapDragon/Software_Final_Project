@@ -50,36 +50,36 @@
         <li class="list-group-item d-flex justify-content-between lh-condensed">
 
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg"
+						src="img/mainBed.png"
 						alt="Card image cap">
 						<div class="mask rgba-white-slight"></div>
+        </li> 
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Room Two Nights</h6>
+            <small class="text-muted">Brief description</small>
+          </div>
+          <span class="text-muted">$250</span>
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
-            <h6 class="my-0">Second product</h6>
-            <small class="text-muted">Brief description</small>
+            <h6 class="my-0">Breakfast</h6>
+            <small class="text-muted">Enjoy a wonderful free breakfast</small>
           </div>
-          <span class="text-muted">$8</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Third item</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$5</span>
+          <span class="text-muted">$0</span>
         </li>
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success">
-            <h6 class="my-0">Promo code</h6>
-            <small>EXAMPLECODE</small>
+            <h6 class="my-0">Canadian Day Celebration</h6>
+            <small>CAD-2020</small>
           </div>
-          <span class="text-success">-$5</span>
+          <span class="text-success">-$10</span>
         </li>
-        <li class="list-group-item d-flex justify-content-between">
-          <span>Total (USD)</span>
-          <strong>$20</strong>
+        <li class="list-group-item d-flex justify-content-between"> 
+          <span>Total (CAD)</span>
+          <strong>$260.00</strong>
         </li>
-      </ul>
+      </ul> 
 
       <form class="card p-2">
         <div class="input-group">
@@ -233,7 +233,7 @@
           </div>
         </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+        <a href="RoomReserved.jsp"class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</a>
       </form>
     </div>
   </div>
