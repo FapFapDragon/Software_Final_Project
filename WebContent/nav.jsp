@@ -37,12 +37,12 @@
 
 	<nav class="nav">
 		<div class="container">
-			<div class="logo" style="float: left;">
+			<div class="logo" style="float: left;"> 
 				<a href="home.jsp"><img src="img/homeIcon.png"></a>
 			</div>
-			<div id="mainListDiv" class="main_list">
-				<ul class="navlinks">
-					<li><a href="#">About</a></li>
+			<div id="mainListDiv" class="main_list"> 
+				<ul class="navlinks"> 
+					<li><a href="AboutUs.jsp">About</a></li>
 					<li><a href="Membership.jsp">Membership</a></li>
 					<li><a href="Reservation.jsp">Reserve</a></li>
 					<c:if test="${Access.loggedIn  == 0}"> 

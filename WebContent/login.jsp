@@ -237,24 +237,30 @@ transform
  
 translate
 (1px
-,
+, 
 0
 px
 );
 
   
-} 
+}
 }
 </style>
 </head>
 <body>
 	<div class="container">
 		<div class="message-warning">
+			<img
+				src="https://i.mycdn.me/image?id=849385275135&t=3&plc=WEB&tkn=*EE_9G06WUxjnLaPnRuKfF410TPM"></img>
 		</div>
+		<img class="profile"
+			src="https://intelinvest.ru/resources/images/index/section3/3.png;jsessionid=2b69fbf781265cbdd33b6c5b3179"
+			alt="Photo of profile" />
 		<form action="Login" method="post">
 			<label for="uname">UserName</label>
 			<div class="container-input">
-				<input id="uname" class="uname" type="text" name="uname"></input> <span class="sub-placeholder">UserName</span>
+				<input id="uname" class="uname" type="text" name="uname"></input> <span
+					class="sub-placeholder">UserName</span>
 			</div>
 			<label for="password">Password</label>
 			<div class="container-input">
@@ -263,6 +269,7 @@ px
 			</div>
 			<input class="loginin" type="submit" value="Login">
 			</form>
+			<a href="aboutUs.jsp">AboutUs</a>
 	</div>
 </body>
 </html>

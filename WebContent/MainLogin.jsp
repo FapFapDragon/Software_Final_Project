@@ -37,7 +37,9 @@
   </div>
 
 
-  <form method="post">
+	<br> 
+	<br>
+  <form method="post" action="Login">
     <div class="container">
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="uname" required>
@@ -45,22 +47,24 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
           
-      <button type="submit">Login</button> 
+      <button class="btn btn-lg btn-block btn-outline-primary" type="submit" value="Login">Login</button> 
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
-              <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a href="Membership.jsp">Sign up</a></button>
+        <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a href="Membership.jsp">Sign up</a></button>
+    			 
+
     
       </label>  
-    </div>
+      
+    </div>  
   
   </form>
-
 
 
   <!--Navigation bar-->
   <div id="footer-holder"></div>
   <script>
-  $(function(){$("#footer-holder").load("footer.jsp");});
+  $(function(){$("#footer-holder").load("footer.jsp");}); 
   </script>
   </body>
 </html>

@@ -22,11 +22,12 @@ public class Login extends HttpServlet {
 
 		if (1 == 1) {
 			HttpSession session = request.getSession();
-			session.setAttribute("username", uname); 
-			response.sendRedirect("welcome.jsp"); 
+			session.setAttribute("username", uname);   
+			response.sendRedirect("home.jsp"); 
 			com.company.Access.loggedIn = 1;
 		} else { 
 			response.sendRedirect("login.jsp");
-		}
-	}
+		} 
+	} 
 }
+  

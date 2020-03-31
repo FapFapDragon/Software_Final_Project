@@ -97,7 +97,7 @@
           <!-- Title -->
           <h4 class="card-title">Canada Day Celebration!</h4>
           <!-- Text -->
-          <p class="card-text">Enjoy breakfast and some wonderful Canadian day events! (10$ Fee at checkout)</p>
+          <p class="card-text">Enjoy breakfast and some wonderful Canadian day events! (-10$ at checkout)</p>
           <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
        				<a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Select</a>
     

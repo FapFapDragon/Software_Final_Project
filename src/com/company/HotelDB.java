@@ -13,9 +13,9 @@ public class HotelDB {
 	
 	public static boolean createConnection() {
 		
-		// This will load the MySQL driver, each DB has its own driver
+		// This will load the MySQL driver, each DB has its own driver 
 		try {
-			con = DriverManager.getConnection(url, user, pass);
+			con = DriverManager.getConnection(url, user, pass); 
             
 		}
 		catch (Exception e) {

@@ -77,7 +77,7 @@
         </li>
         <li class="list-group-item d-flex justify-content-between"> 
           <span>Total (CAD)</span>
-          <strong>$260.00</strong>
+          <strong>$240.00</strong>
         </li>
       </ul> 
 

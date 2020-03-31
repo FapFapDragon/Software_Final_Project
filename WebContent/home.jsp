@@ -22,13 +22,13 @@
 <!--Navigation bar-->
 <div id="nav-holder"></div>
 <script>
-$(function(){$("#nav-holder").load("nav.jsp");});
+$(function(){$("#nav-holder").load("nav.jsp");}); 
 </script>
-</head>
+</head>  
 
 
 <body>
-  <div class="hero-image" style= "background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("homeHero.jpeg")">
+  <div class="hero-image" style= "background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(img/homeHero.jpeg)">
     <div class="hero-text">
       <h1 style="font-size:3.5vw;">Superior In Every Way </h1>
       <h4 style="font-size:1.5vw;">Experience The Largest Lake In The World</h4>
@@ -73,7 +73,7 @@ $(function(){$("#nav-holder").load("nav.jsp");});
 
     <div class="row">
       <div class="col-md-12">
-        <img src="img/membership.jpg" alt="test" class="img-fluid">
+        <a href = "Membership.jsp"><img src="img/membership.jpg" alt="test" class="img-fluid"></a>
         <div class="carousel-caption">
           <h1>Become a member today!</h1>
         </div>
@@ -90,14 +90,14 @@ $(function(){$("#nav-holder").load("nav.jsp");});
   <div id="footer-holder"></div>
   <script>
   $(function(){$("#footer-holder").load("footer.jsp");});
-  </script>d
+  </script>
 </body>
 </html>
 
-
+  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="js/scripts.js"></script>
-<script>
+<script> 
   $('.navTrigger').click(function () {
     $(this).toggleClass('active');
     console.log("Clicked menu");
