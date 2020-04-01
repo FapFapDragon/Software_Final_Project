@@ -74,9 +74,9 @@ public class Customer {
     	}
     }
 
-    public void generateComplaint(String desciption, int roomID, Date openTime, boolean complete)
+    public void generateComplaint(String description, int roomID, Date openTime, boolean complete)
     {
-    	complaintTicket = new ComplaintTicket(desciption, roomID, openTime, complete);
+    	complaintTicket = new ComplaintTicket(description, roomID, openTime, complete);
     	complaint = true;
     }
 
