@@ -7,7 +7,7 @@ public class Access {
 	static public String locationOfWebsite = "Login.jsp";
 	 
 	public static void setTestInt ( int a ) { 
-		Access.loggedIn = a ;
+		Access.loggedIn = ab ;
    } 
 }
         
