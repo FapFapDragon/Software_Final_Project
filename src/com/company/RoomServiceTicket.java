@@ -7,7 +7,7 @@ public class RoomServiceTicket extends Ticket{
     private String Order;
     private String specialRequest;
     
-    public RoomServiceTicket(int roomID, Room room, Date requestTime, Date requestedTime, String Order, String specialRequest) {
+    public RoomServiceTicket(int roomID, Date requestTime, Date requestedTime, String Order, String specialRequest) {
     	super("Room Service", roomID, requestTime, false);
     	this.roomID = roomID;
     	this.requestedTime = requestedTime;

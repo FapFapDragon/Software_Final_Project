@@ -2,9 +2,15 @@ package com.company;
 
 import java.util.List;
 
+import com.company.Enums.PermissionType;
+
 public class Manager extends Employee{
     private List<ComplaintTicket> complaints;
     //Display stats about the hotel
+    public Manager(PermissionType permissionLevel, String name, String role, float wage) {
+    	super(permissionLevel, name, role, wage);
+    }
+    
     public void HotelStats()
     {
     	
@@ -28,6 +34,11 @@ public class Manager extends Employee{
     public void RemoveShifts()
     {
 
+    }
+    
+    //retrieve list of complaints
+    public void getComplaints() {
+    	
     }
 
     public void PlaceOrder()

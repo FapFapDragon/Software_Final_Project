@@ -99,6 +99,7 @@ public class Customer {
 	}
 
 	public void setBooking(Booking booking) {
+		setCheckedIn(true);
 		this.booking = booking;
 	}
 

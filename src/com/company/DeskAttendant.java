@@ -1,11 +1,16 @@
 package com.company;
 
 import java.util.ArrayList;
+import com.company.Enums.*;
 import java.util.Date;
 
 public class DeskAttendant extends Employee{
     private static ArrayList<ComplaintTicket> complaints;
 
+    public DeskAttendant(PermissionType permissionLevel, String name, String role, float wage) {
+    	super(permissionLevel, name, role, wage);
+    }
+    
 	public Boolean checkIn(Customer client, Room room, Date checkout) {
 		Booking booking = new Booking(client, room, new Date(), checkout);
 		if (room.checkIn(booking))
