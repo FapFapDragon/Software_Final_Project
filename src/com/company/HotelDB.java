@@ -111,7 +111,10 @@ public class HotelDB {
                 cx = new Customer(rs.getInt(1), rs.getLong(5), rs.getString(6));
                 cx.addMembership(null);// If memberships are added in the future, this will be changed to retrieve a membership
                 Booking b = getCustomerBooking(rs.getInt(1));
-                b.setClient(cx);
+                
+                if (b != null) {
+                	b.setClient(cx);
+                }
                 cx.setBooking(b);//get the booking information
                 return cx;
             }
@@ -642,8 +645,7 @@ public class HotelDB {
             ResultSet rs = st.executeQuery(query);
             Employee emp = null;
             if (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-            	//Store from DB in local variables
+                //Store from DB in local variables
             	String name	 = rs.getString(2);
             	String role	 = rs.getString(4);
             	PermissionType perm = PermissionType.valueOf(rs.getString(1));
@@ -664,7 +666,7 @@ public class HotelDB {
 		}
 	}
 	
-	//----------------------------------Get Login---------------------------------------------------//
+	//----------------------------------Accounts---------------------------------------------------//
 	public static int Login(String username, String password) {
 		String query = "SELECT * FROM hotel.order_request WHERE type IS NOT NULL";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
@@ -676,14 +678,14 @@ public class HotelDB {
 			System.out.println("Could not connect to Database");
 		}
         try {
+        	
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (!rs.next()) {
             	return -1;
             }
             while (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-            	//Store from DB in local variables
+                //Store from DB in local variables
             	String user = rs.getString(0);
             	String pass = rs.getString(1);
             	if (user == username && pass == password) {
@@ -694,6 +696,30 @@ public class HotelDB {
 		}
 		catch (Exception e) {
 				System.out.println("Oh No");
+			   e.printStackTrace();
+			   return -1;
+		}
+        return -1;
+	}
+	
+	public static int createAccount(String username, String password, int type) {
+		String query = "USE hotel; INSERT INTO accounts: VALUES (";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		query = query + "'" + username + "', ";
+		query = query + "'" + password + "', ";
+		query = query + "'" + String.valueOf(type) + "'";
+		query = query + ");";
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+        try {
+    		Statement st = con.createStatement();
+    		System.out.println(query);
+            st.executeUpdate(query);
+		}
+		catch (Exception e) {
+			   System.out.println("Oh No");
 			   e.printStackTrace();
 			   return -1;
 		}

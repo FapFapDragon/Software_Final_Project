@@ -1,11 +1,10 @@
 package com.company;
 
-import java.sql.*;
- 
 import java.util.Date;
 
 
 import com.company.Enums.*;
+
 public class Main {
 
     @SuppressWarnings("deprecation")
@@ -59,6 +58,7 @@ public class Main {
     	System.out.println(desk.CancelReservation(client1));
     	System.out.println("");
     	*/
-    	HotelDB.getCustomer(1234, "john", 5194971377L);
+    	//HotelDB.getCustomer(1, null, 1234567890L, 6);
+    	HotelDB.createAccount("Troy", "Pizza", 1);
     }
 }
