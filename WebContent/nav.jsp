@@ -37,23 +37,23 @@
 
 	<nav class="nav">
 		<div class="container">
-			<div class="logo" style="float: left;">
+			<div class="logo" style="float: left;"> 
 				<a href="home.jsp"><img src="img/homeIcon.png"></a>
 			</div>
-			<div id="mainListDiv" class="main_list">
-				<ul class="navlinks">
-					<li><a href="#">About</a></li>
+			<div id="mainListDiv" class="main_list"> 
+				<ul class="navlinks"> 
+					<li><a href="AboutUs.jsp">About</a></li>
 					<li><a href="Membership.jsp">Membership</a></li>
 					<li><a href="Reservation.jsp">Reserve</a></li>
-					<c:if test="${Access.loggedIn  == 0}">
-					<li><a href="Login.jsp">Login</a></li>
+					<c:if test="${Access.loggedIn  == 0}"> 
+					<li><a href="MainLogin.jsp">Login</a></li>
 					</c:if>
 					<c:if test="${Access.loggedIn == 1}">
-					<li><a href="Login.jsp">My Account</a></li>
-					</c:if>
+					<li><a href="MyAccountCustomer.jsp">Account</a></li>
+					</c:if>  
 					<c:if test="${Access.loggedIn == 2}">
-					<li><a href="Login.jsp">Tickets</a></li>
-					<li><a href="Employee.jsp">Account</a></li>
+					<li><a href="TicketsMain.jsp">Tickets</a></li>
+					<li><a href="MyAccountStaff.jsp">Account</a></li>
 					</c:if>
 				</a></li>
 				

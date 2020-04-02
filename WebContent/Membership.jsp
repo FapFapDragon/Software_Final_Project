@@ -4,7 +4,7 @@
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html>
 
-    <%!
+    <%! 
           public String sendMail(String to, String sub, String msg) {
             String res = null;      
             System.out.println("HI");      

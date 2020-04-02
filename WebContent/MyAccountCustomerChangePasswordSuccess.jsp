@@ -1,7 +1,18 @@
+<%@page import="com.company.Access"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+
+<%@ page import= "javax.servlet.jsp.jstl.core.*" %>
+<%@ page import="com.company.Access.*"%>
+<%@ taglib
+    prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" 
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
+
 
 <head>
   <meta charset="ISO-8859-1">
@@ -17,54 +28,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="WebStyle.css">
-
-<%@include file="nav.jsp"%>
-    <div id="PeopleTableContainer" style="width: 800px;"></div>
-</head>
+  <link rel="stylesheet" type="text/css" href="WebStyle.css">
+  <!--Navigation bar-->
   <div id="nav-holder"></div>
   <script>
     $(function () { $("#nav-holder").load("nav.jsp"); });
   </script>
- 
 </head>
-
-<body>
-
-  <div class="hero-image-small">
-      <img src="img/logo.png" class="marginauto">
-    </div>
-  </div>
-
-
-  <form method="post">
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-   
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-          
-      <button type="submit">Login</button> 
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-              <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a href="Membership.jsp">Sign up</a></button>
-    
-      </label>  
-    </div>
-  
-  </form>
-
-
-
-  <!--Navigation bar-->
-  <div id="footer-holder"></div>
-  <script>
-  $(function(){$("#footer-holder").load("footer.jsp");});
-  </script>
-  </body>
-</html>
-
 
 
 <style>
@@ -117,3 +87,44 @@
   }
   
   </style>
+<body>
+
+  <div class="hero-image-small">
+      <img src="img/logo.png" class="marginauto">
+  </div>
+  </div>
+
+
+
+  <br>
+  <br>
+<c:if test="${Access.loggedIn  == 1}"> 
+  <div class="jumbotron text-center">
+    <h1 class="display-3">Your Password Has Been Changed!</h1>
+    <p class="lead"><strong>If you have any concerns please call us or email at support@bckjt.com</strong> </p>
+    <hr>
+
+
+  </div>
+    	</c:if>
+  
+  
+  
+  	<c:if test="${Access.loggedIn  != 1}"> 
+  <div class="jumbotron text-center">
+    <h1 class="display-3">Sorry You Must Log In To Access This Page</h1>
+    <p class="lead"><strong>If you have any concerns please call us or email at support@bckjt.com</strong> </p>
+    <hr>
+  </div>
+	</c:if>
+  
+
+
+
+  <!--Navigation bar-->
+  <div id="footer-holder"></div>
+  <script>
+    $(function () { $("#footer-holder").load("footer.jsp"); });
+  </script>
+</body>
+</html>

@@ -2,7 +2,13 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-
+<%@ page import= "javax.servlet.jsp.jstl.core.*" %>
+<%@ page import="com.company.Access.*"%>
+<%@ taglib
+    prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" 
+%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <head>
@@ -46,11 +52,11 @@
 
 			<!-- Card -->
 			<div class="card mb-4">
-
+  
 				<!-- Card image -->
-				<div class="view overlay">
+				<div class="view overlay"> 
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg"
+						src="img/mainBed.png"
 						alt="Card image cap"> <a href="#!">
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -60,12 +66,11 @@
 				<div class="card-body">
  
 					<!-- Title -->
-					<h4 class="card-title">Card title</h4>
+					<h4 class="card-title">Wonderful Summer Get Away</h4>
 					<!-- Text -->
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Lovely room near the volly ball court.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+        <a href="SpecialOffers.jsp" class="btn btn-primary btn-lg btn-block" type="submit" >Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -79,7 +84,7 @@
 				<!-- Card image -->
 				<div class="view overlay">
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg"
+						src="img/bed1.png"
 						alt="Card image cap"> <a href="#!">
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -88,12 +93,11 @@
 				<!-- Card content -->
 				<div class="card-body">
 					<!-- Title -->
-					<h4 class="card-title">Card title</h4>
-					<!-- Text -->
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<h4 class="card-title">Lovers Get Away</h4>
+					<!-- Text --> 
+					<p class="card-text">Enjoy a bed full of roses for your romantic get away.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+       				<a href="SpecialOffers.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -107,7 +111,7 @@
 				<!-- Card image -->
 				<div class="view overlay">
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/77.jpg"
+						src="img/bed2.png"
 						alt="Card image cap"> <a href="#!">
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -117,13 +121,12 @@
 				<div class="card-body">
 
 					<!-- Title -->
-					<h4 class="card-title">Card title</h4>
+					<h4 class="card-title">Quite And Tranquil</h4>
 					<!-- Text -->
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Meditate With ease in this room</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
 				
-        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+        <a href="SpecialOffers.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 					
 
@@ -144,7 +147,7 @@
 				<!-- Card image -->
 				<div class="view overlay">
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg"
+						src="img/bed3.png"
 						alt="Card image cap"> <a href="#!">
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -154,12 +157,11 @@
 				<div class="card-body">
 
 					<!-- Title -->
-					<h4 class="card-title">Card title</h4>
+					<h4 class="card-title">Family Ready Room!</h4>
 					<!-- Text -->
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Yes your kids can jump on our beds.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+        <a href="SpecialOffers.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -173,7 +175,7 @@
 				<!-- Card image -->
 				<div class="view overlay">
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg"
+						src="img/bed4.png"
 						alt="Card image cap"> <a href="#!">
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -182,12 +184,11 @@
 				<!-- Card content -->
 				<div class="card-body">
 					<!-- Title -->
-					<h4 class="card-title">Card title</h4>
+					<h4 class="card-title">Business Ready Room</h4>
 					<!-- Text -->
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Two beds, two desks, get some work done!</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+        <a href="SpecialOffers.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
 				<!-- Card content -->
@@ -201,7 +202,7 @@
 				<!-- Card image -->
 				<div class="view overlay">
 					<img class="card-img-top"
-						src="https://mdbootstrap.com/img/Photos/Others/images/77.jpg"
+						src="img/bed5.png"
 						alt="Card image cap"> <a href="#!">
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -211,15 +212,14 @@
 				<div class="card-body">
 
 					<!-- Title -->
-					<h4 class="card-title">Card title</h4>
+					<h4 class="card-title">Relax With Blue</h4>
 					<!-- Text -->
-					<p class="card-text">Some quick example text to build on the
-						card title and make up the bulk of the card's content.</p>
+					<p class="card-text">Enjoyable blue room! We know its your favorite.</p>
 					<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-        <a href="ReserveRoomCheckout.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
+        <a href="SpecialOffers.jsp" class="btn btn-primary btn-lg btn-block" type="submit">Reserve Room</a>
 
 				</div>
-				<!-- Card content -->
+				<!-- Card content --> 
 
 			</div>
 			<!-- Card -->
