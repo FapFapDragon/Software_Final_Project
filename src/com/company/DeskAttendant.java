@@ -52,7 +52,7 @@ public class DeskAttendant extends Employee{
     	return false;
 	}
 
-	public boolean CancelReservation(Customer client) {
+	public boolean cancelReservation(Customer client) {
 		Room checkoutRoom = client.getRoom();
 		if (checkoutRoom == null)
 			return false;
@@ -61,23 +61,23 @@ public class DeskAttendant extends Employee{
 		return true;
 	}
 
-	public void CheckRooms() {
+	public void checkRooms() {
 		// TODO
 	}
 
-	public void ProcessPayment() {
+	public void processPayment() {
 		System.out.println("paying...");
 	}
 
-	public void ViewTickets() {
+	public void viewTickets() {
 		// TODO
 	}
 
-	public WakeUpTimer ViewWakeupTime(Customer client) {	
+	public WakeUpTimer viewWakeupTime(Customer client) {	
 		return client.getWakeUpTimer();
     }
 
-	public void SetWakeupTime(Customer client, WakeUpTimer wakeup) {
+	public void setWakeupTime(Customer client, WakeUpTimer wakeup) {
 		client.setWakeUpTimer(wakeup);
 	}
 

@@ -11,44 +11,44 @@ public class Manager extends Employee{
     	super(permissionLevel, name, role, wage);
     }
     
-    public void HotelStats()
+    public void hotelStats()
     {
-    	
+    	//TODO
     }
 
-    public void BuildTickets()
+    public void buildTickets()
     {
-    	
+    	//TODO
     }
 
-    public void GetDiscounts()
+    public void getDiscounts()
     {
-
+    	//TODO
     }
 
-    public void AddShift()
+    public void addShift()
     {
-
+    	//TODO
     }
 
-    public void RemoveShifts()
+    public void removeShifts()
     {
-
+    	//TODO
     }
     
     //retrieve list of complaints
     public void getComplaints() {
-    	
+    	//TODO
     }
 
-    public void PlaceOrder()
+    public void placeOrder()
     {
-
+    	//TODO
     }
 
-    public void ChangeWage()
+    public void changeWage()
     {
-
+    	//TODO
     }
     
 	public void generateOrderRequest() {

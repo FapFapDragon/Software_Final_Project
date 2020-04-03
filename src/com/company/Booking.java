@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Date;
 
-
+//booking is the aggregation class between client and room
 public class Booking {
 	private int ID;
 	private Customer client;
