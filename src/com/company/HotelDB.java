@@ -35,9 +35,9 @@ public class HotelDB {
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
 		if (size != null) {query = query + " AND size = " + size.name();}
-		if (view != null) {query = query + " AND view = " + size.name();}
+		if (view != null) {query = query + " AND view = " + view.name();}
 		if (floor != 0) {query = query + " AND floor = " + String.valueOf(floor);}
-		if (state != null) {query = query + " AND state = " + String.valueOf(state);}
+		if (state != null) {query = query + " AND state = " + state.name();}
 		
 		query = query +  ";";
 		
@@ -45,11 +45,6 @@ public class HotelDB {
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -82,6 +77,77 @@ public class HotelDB {
 		}
 	}	
 	
+	public static ArrayList<Room> getRooms(int ID, Size size, View view, int floor, State state) {
+		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
+		if (size != null) {query = query + " AND size = " + size.name();}
+		if (view != null) {query = query + " AND view = " + view.name();}
+		if (floor != 0) {query = query + " AND floor = " + String.valueOf(floor);}
+		if (state != null) {query = query + " AND state = " + state.name();}
+		
+		query = query +  ";";
+		
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+		
+        try {
+    		Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ArrayList<Room> rooms = new ArrayList<Room>();
+            while (rs.next()) {
+                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
+                int roomID = rs.getInt(0);
+                int beds = rs.getInt(1);
+                Size s = Size.valueOf(rs.getString(2));
+                View v = View.valueOf(rs.getString(3));
+                State ste = State.valueOf(rs.getString(4));
+                int fl = rs.getInt(5);
+                int booking_id = rs.getInt(6);
+                Room room = new Room(roomID, beds, s, v, fl);
+                room.setState(ste);
+                Booking b = getRoomBooking(booking_id);
+                b.setRoom(room);
+                room.setBooking(b);
+                rooms.add(room);
+            }
+            return rooms;
+		}
+		catch (Exception e) {
+				System.out.println("Oh No");
+			   e.printStackTrace();
+			   return null;
+		}
+	}	
+	
+	public static int createRooms(int ID, int beds, Size size, View view, int floor, State state) {
+		String query = "USE hotel;\n INSERT INTO room VALUES (";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		query = query + "'" + String.valueOf(ID) + "', ";
+		query = query + "'" + String.valueOf(beds) + "', ";
+		query = query + "'" + size.name() + "'";
+		query = query + "'" + view.name() + "'";
+		query = query + "'" + state.name() + "'";
+		query = query + "'" + String.valueOf(floor) + "'";
+		query = query + ");";
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+        try {
+    		Statement st = con.createStatement();
+    		System.out.println(query);
+            st.executeUpdate(query);
+		}
+		catch (Exception e) {
+			   System.out.println("Oh No");
+			   e.printStackTrace();
+			   return -1;
+		}
+        return -1;
+	}
 	//----------------------------------Customer---------------------------------------------------//
 	
 	public static Customer getCustomer(int ID, String address, long phonenumber, int bookingID) {
@@ -97,11 +163,7 @@ public class HotelDB {
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
+		
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -130,6 +192,44 @@ public class HotelDB {
 		}
 	}
 	
+	public static  ArrayList<Customer> getCustomers(int ID, String address, long phonenumber, int bookingID) {
+		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
+		if (address != null) {query = query + " AND address = '" + address + "'";}
+		if (phonenumber != 0) {query = query + " AND phone_number = " + String.valueOf(phonenumber);}
+		if (bookingID != 0) {query = query + " AND booking_id = " + String.valueOf(bookingID);}
+		query = query +  ";";
+		
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+        try {
+    		Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ArrayList<Customer> customers = new ArrayList<Customer>();
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
+                Customer cx = new Customer(rs.getInt(1), rs.getLong(5), rs.getString(6));
+                cx.addMembership(null);// If memberships are added in the future, this will be changed to retrieve a membership
+                Booking b = getCustomerBooking(rs.getInt(1));
+                
+                if (b != null) {
+                	b.setClient(cx);
+                }
+                cx.setBooking(b);//get the booking information
+                customers.add(cx);
+            }
+            return customers;
+		}
+		catch (Exception e) {
+				System.out.println("Oh No");
+			   e.printStackTrace();
+			   return null;
+		}
+	}
+	
 	private static Customer getBookingCustomer(int ID) {
 		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
@@ -140,11 +240,7 @@ public class HotelDB {
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
+	
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -166,18 +262,50 @@ public class HotelDB {
 			   return null;
 		}
 	}
+	
+	public static int createCustomer(int ID, int checkedIn, int booking_id, long phone , String address, String notes, String important_notes, int ticketID) {
+		String query = "USE hotel;\n INSERT INTO customer VALUES (";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		query = query + "'" + String.valueOf(ID) + "', ";
+		query = query + "'" + String.valueOf(0) + "', ";
+		query = query + "'" + String.valueOf(checkedIn) + "'";
+		query = query + "'" + String.valueOf(booking_id) + "'";
+		query = query + "'" + String.valueOf(phone) + "'";
+		query = query + "'" + address + "'";
+		query = query + "'" + notes + "'";
+		query = query + "'" + important_notes + "'";
+		query = query + "'" + String.valueOf(ticketID) + "'";
+		query = query + ");";
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+        try {
+    		Statement st = con.createStatement();
+    		System.out.println(query);
+            st.executeUpdate(query);
+		}
+		catch (Exception e) {
+			   System.out.println("Oh No");
+			   e.printStackTrace();
+			   return -1;
+		}
+        return -1;
+	}
 
 	//----------------------------------Bookings---------------------------------------------------//
 	static public Booking getBooking(int clientID, int roomID, Date checkInDate, Date checkOutDate) {
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//Add date format to convert to sql date
+		//Build Query
+		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";	
 		if (clientID != 0) {query = query + " AND customer_id = " + String.valueOf(clientID);}	
 		if (roomID != 0) {query = query + " AND room_id = " + String.valueOf(roomID);}
+		//Convert date to sql date format and add to query
 		if (checkInDate != null) {
-			
 			String currentTime = sdf.format(checkInDate);
 			query = query + " AND checkin_date = '" + String.valueOf(currentTime) + "'";
 		}
+		//Convert date to sql date format and add to query
 		if (checkOutDate != null) {
 			String currentTime = sdf.format(checkOutDate);
 			query = query + " AND checkout_date = '" + String.valueOf(currentTime) + "'";
@@ -186,7 +314,7 @@ public class HotelDB {
 		
 		
 		if (!createConnection()) {
-			System.out.println("Could not connect to Database");
+			System.out.println("Could not connect to Database");	//If connection cannot be created, will throw error
 		}
 		try {
     		Statement st = con.createStatement();
@@ -211,6 +339,54 @@ public class HotelDB {
             	System.out.println("No results found matching query");
             	return null;
             }
+		}
+		catch (Exception e) {
+				System.out.println("Oh No");
+			   e.printStackTrace();
+			   return null;
+		}
+	}
+	
+	static public ArrayList<Booking> getBookings(int clientID, int roomID, Date checkInDate, Date checkOutDate) {
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";
+		if (clientID != 0) {query = query + " AND customer_id = " + String.valueOf(clientID);}	
+		if (roomID != 0) {query = query + " AND room_id = " + String.valueOf(roomID);}
+		if (checkInDate != null) {
+			
+			String currentTime = sdf.format(checkInDate);
+			query = query + " AND checkin_date = '" + String.valueOf(currentTime) + "'";
+		}
+		if (checkOutDate != null) {
+			String currentTime = sdf.format(checkOutDate);
+			query = query + " AND checkout_date = '" + String.valueOf(currentTime) + "'";
+		}
+		query = query +  ";";
+		
+		
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+		try {
+    		Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ArrayList<Booking> bookings= new ArrayList<Booking>();
+            while (rs.next()) {
+            	int CID = rs.getInt(1);
+            	int RID = rs.getInt(2);
+            	String CIDate = rs.getString(3);
+            	Date in = sdf.parse(CIDate);
+            	String CODate = rs.getString(4);
+            	Date out = sdf.parse(CODate);
+            	//Get Customer, Get Room then Return complete Booking
+            	Customer c = getBookingCustomer(CID);
+            	Room r = getRoom(RID, null, null, 0, null);
+            	Booking book = new Booking(c, r, in, out);
+            	c.setBooking(book);
+            	book.setClient(c);
+                bookings.add(book);
+            }
+            return bookings;
 		}
 		catch (Exception e) {
 				System.out.println("Oh No");
@@ -295,6 +471,35 @@ public class HotelDB {
 			   return null;
 		}
 	}
+	
+	public static int createBooking(int ID, int customerID, int roomID, Date in, Date out) {
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String query = "USE hotel;\n INSERT INTO booking VALUES (";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		query = query + "'" + String.valueOf(ID) + "', ";
+		query = query + "'" + String.valueOf(customerID) + "', ";
+		query = query + "'" + String.valueOf(roomID) + "'";
+		String inDate = sdf.format(in);
+		query = query + "'" + String.valueOf(inDate) + "'";
+		String outDate = sdf.format(out);
+		query = query + "'" + String.valueOf(outDate) + "'";
+		query = query + ");";
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+        try {
+    		Statement st = con.createStatement();
+    		System.out.println(query);
+            st.executeUpdate(query);
+		}
+		catch (Exception e) {
+			   System.out.println("Oh No");
+			   e.printStackTrace();
+			   return -1;
+		}
+        return -1;
+	}
 
 	//----------------------------------Shift---------------------------------------------------//
 	static public Shift getShift(String employeeID, Date day, float time) {
@@ -334,6 +539,68 @@ public class HotelDB {
 			   e.printStackTrace();
 			   return null;
 		}
+	}
+	
+	static public ArrayList<Shift> getShifts(String employeeID, Date day, float time) {
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String query = "SELECT * FROM hotel.shift WHERE employee_id IS NOT NULL";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		if (employeeID != null) {query = query + " AND employee_id = '" + employeeID + "'";}	
+		if (time != 0) {query = query + " AND time = " + String.valueOf(time);}
+		if (day != null) {	
+			String currentTime = sdf.format(day);
+			query = query + " AND date = '" + String.valueOf(currentTime) + "'";
+		}
+		query = query +  ";";
+		
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+		try {
+    		Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            ArrayList<Shift> shifts = new  ArrayList<Shift>();
+            while (rs.next()) {
+             	String UID = rs.getString(0);
+            	String CIDate = rs.getString(1);
+            	float thyme = rs.getInt(2);
+            	Date SHDate = sdf.parse(CIDate);
+            	Shift shift = new Shift( UID, SHDate, thyme);
+                shifts.add(shift);
+            }
+            return shifts;
+		}
+		catch (Exception e) {
+				System.out.println("Oh No");
+			   e.printStackTrace();
+			   return null;
+		}
+	}
+	
+	public static int createBooking(int ID, Date day, float time, int changed) {
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String query = "USE hotel;\n INSERT INTO booking VALUES (";
+		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		query = query + "'" + String.valueOf(ID) + "', ";
+		String inDate = sdf.format(time);
+		query = query + "'" + String.valueOf(inDate) + "'";
+		query = query + "'" + String.valueOf(changed) + "', ";
+		query = query + ");";
+		System.out.println(query);
+		if (!createConnection()) {
+			System.out.println("Could not connect to Database");
+		}
+        try {
+    		Statement st = con.createStatement();
+    		System.out.println(query);
+            st.executeUpdate(query);
+		}
+		catch (Exception e) {
+			   System.out.println("Oh No");
+			   e.printStackTrace();
+			   return -1;
+		}
+        return -1;
 	}
 	
 	//----------------------------------Wake_up---------------------------------------------------//
@@ -703,7 +970,7 @@ public class HotelDB {
 	}
 	
 	public static int createAccount(String username, String password, int type) {
-		String query = "USE hotel; INSERT INTO accounts: VALUES (";
+		String query = "USE hotel;\n INSERT INTO accounts VALUES (";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		query = query + "'" + username + "', ";
 		query = query + "'" + password + "', ";
@@ -725,5 +992,4 @@ public class HotelDB {
 		}
         return -1;
 	}
-	
 }
