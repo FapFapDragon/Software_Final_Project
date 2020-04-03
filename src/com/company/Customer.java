@@ -74,12 +74,14 @@ public class Customer {
     	}
     }
 
+    //generates complaint ticket
     public void generateComplaint(String description, int roomID, Date openTime, boolean complete)
     {
     	complaintTicket = new ComplaintTicket(description, roomID, openTime, complete);
     	complaint = true;
     }
-
+    
+    //closes complaint ticket
     public void removeComplaint()
     {
     	complaint = false;
