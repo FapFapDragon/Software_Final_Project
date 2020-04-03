@@ -5,6 +5,9 @@ import java.util.Date;
 
 import com.company.Enums.*;
 
+//we used this as a tester/driver function
+//everything is done through the website
+
 public class Main {
 
     @SuppressWarnings("deprecation")

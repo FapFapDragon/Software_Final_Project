@@ -29,6 +29,7 @@ public class Room {
 		this.setRoomService(null);
 	}
 
+	//creates a booking if the room is in the right state
 	public boolean checkIn(Booking booking) {
 		if (this.getState() == State.CLEAN) {
 			this.setBooking(booking);
@@ -38,10 +39,12 @@ public class Room {
 			return false;
 	}
 
+	//reserves the room
 	public void reserve(Booking booking) {
 		futureBookings.add(booking);
 	}
 	
+	//cancels reservation and adjusts booking list
 	public void cancelReservation(Booking booking) {
 		ListIterator<Booking> list = futureBookings.listIterator();
 		ArrayList<Booking> cleanList = new ArrayList<Booking>();
@@ -57,6 +60,11 @@ public class Room {
 		return futureBookings;
 	}
 
+	//deals with reservations
+	//basically run this function periodically
+	//if the reservation is due today add it to current bookings
+	//if it is a previous date remove it
+	//ensures the reservations are clean
 	public void reservationHandler() {
 		ListIterator<Booking> list = futureBookings.listIterator();
 		Date currDate = new Date();
