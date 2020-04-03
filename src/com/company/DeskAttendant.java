@@ -11,6 +11,7 @@ public class DeskAttendant extends Employee{
     	super(permissionLevel, name, role, wage);
     }
     
+    //check a client into a room
 	public Boolean checkIn(Customer client, Room room, Date checkout) {
 		Booking booking = new Booking(client, room, new Date(), checkout);
 		if (room.checkIn(booking))
@@ -18,6 +19,7 @@ public class DeskAttendant extends Employee{
 		return false;
 	}
 
+	//check a client out of a room
 	public boolean checkOut(Customer client) {
 		Room checkoutRoom = client.getRoom();
 		if (checkoutRoom == null)
@@ -27,23 +29,28 @@ public class DeskAttendant extends Employee{
 		return true;
 	}
 
+	//changes your room
     public void upgradeRoom(Customer client, Room room, Date checkout)
     {
     	this.checkOut(client);
     	this.checkIn(client, room, checkout);
     }
     
+    //creates a reservation, essentially adds the room to future bookings if its available
     public boolean createReservation(Customer client, Room room, Date checkout) {
     	Booking booking = new Booking(client, room, new Date(), checkout);
     	ArrayList<Booking> futureReservations = room.getFutureBookings();
     	boolean available = true;
     	Date currDate = new Date();
+    	//check every future booking
     	for (Booking reservation : futureReservations) {
+    		//for date overlap
     		if ((reservation.getCheckInDate().before(currDate) && reservation.getCheckOutDate().after(currDate)) || 
     				(reservation.getCheckInDate().before(checkout) && reservation.getCheckOutDate().after(checkout)) ||
     				reservation.getCheckInDate().equals(currDate) || reservation.getCheckOutDate().equals(checkout))
     			available = false;
     	}
+    	//if theres no overlap reserve it
     	if (available) {
     		room.reserve(booking);
     		client.setBooking(booking);
@@ -65,6 +72,7 @@ public class DeskAttendant extends Employee{
 		// TODO
 	}
 
+	//hypothetical way payment would be processed, we are NOT implementing payment
 	public void processPayment() {
 		System.out.println("paying...");
 	}
