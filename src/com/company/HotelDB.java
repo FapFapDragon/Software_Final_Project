@@ -10,28 +10,34 @@ public class HotelDB {
 	private static final String user = "access";	//username to connect to DB
 	private static final String pass = "root";		//DB password
 
-	private static Connection con;
+	private static Connection con;	//Variable which holds the connection
+	
+	//All functions are Static because this is a utility to connect to the DB rather than an actual object
 	
 	//----------------------------------Connection---------------------------------------------------//
 	
+	//Attempt to connect to the SQL SERVER 
 	public static boolean createConnection() {
 		
 		// This will load the MySQL driver, each DB has its own driver 
+		//Attempt to connect to MYSQL Database, if you cannot connect, throw error
 		try {
 			con = DriverManager.getConnection(url, user, pass); 
-            
 		}
 		catch (Exception e) {
+				//Return false and show error
 				System.out.println("Oh No");
-			   e.printStackTrace();
-			   return false;
+				e.printStackTrace();
+				return false;
 		}		
 		return true;
 	}
 	//----------------------------------Room---------------------------------------------------//
 	
 	public static Room getRoom(int ID, Size size, View view, int floor, State state) {
-		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
+		//Select * where ID is not null will return all results alone
+		String query = "SELECT * FROM hotel.room WHERE id IS NOT NULL";
+		
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
 		if (size != null) {query = query + " AND size = " + size.name();}
@@ -41,36 +47,43 @@ public class HotelDB {
 		
 		query = query +  ";";
 		
-		System.out.println(query);
+		//If a connection cannot be created, let user know
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
+		
+		//Attempt to retrieve class from database
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             Room room = null;
-            if (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-                int roomID = rs.getInt(0);
+            if (rs.next()) {	//If there was a result
+                //Store DB variables in local variables
+            	int roomID = rs.getInt(0);
                 int beds = rs.getInt(1);
                 Size s = Size.valueOf(rs.getString(2));
                 View v = View.valueOf(rs.getString(3));
                 State ste = State.valueOf(rs.getString(4));
                 int fl = rs.getInt(5);
                 int booking_id = rs.getInt(6);
+                
+                //Create and initalize Local Room object from DB Room table
                 room = new Room(roomID, beds, s, v, fl);
                 room.setState(ste);
                 Booking b = getRoomBooking(booking_id);
                 b.setRoom(room);
                 room.setBooking(b);
+                
+                //Return the found Room as Java Room object
                 return room;
             }
             else {
+            	//If no results found Inform user and return nothing
             	System.out.println("No results found matching query");
             	return null;
             }
 		}
-		catch (Exception e) {
+		catch (Exception e) {	//On exceptions, print exception, return null
 				System.out.println("Oh No");
 			   e.printStackTrace();
 			   return null;
@@ -78,7 +91,9 @@ public class HotelDB {
 	}	
 	
 	public static ArrayList<Room> getRooms(int ID, Size size, View view, int floor, State state) {
-		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
+		//Select * where ID is not null will return all results alone
+		String query = "SELECT * FROM hotel.room WHERE id IS NOT NULL";
+		
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
 		if (size != null) {query = query + " AND size = " + size.name();}
@@ -88,17 +103,17 @@ public class HotelDB {
 		
 		query = query +  ";";
 		
-		System.out.println(query);
+		//If a connection cannot be created, let user know
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		
+		//Attempt to retrieve class from database
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Room> rooms = new ArrayList<Room>();
-            while (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
+            while (rs.next()) {		//Loop through all results
+                //Store DB variables in local variables
                 int roomID = rs.getInt(0);
                 int beds = rs.getInt(1);
                 Size s = Size.valueOf(rs.getString(2));
@@ -107,15 +122,18 @@ public class HotelDB {
                 int fl = rs.getInt(5);
                 int booking_id = rs.getInt(6);
                 Room room = new Room(roomID, beds, s, v, fl);
+                //Create and initalize Local Room object from DB Room table
                 room.setState(ste);
                 Booking b = getRoomBooking(booking_id);
                 b.setRoom(room);
                 room.setBooking(b);
+                
+                //Add room to list
                 rooms.add(room);
             }
             return rooms;
 		}
-		catch (Exception e) {
+		catch (Exception e) {	//If exception occurs, print exception and return null
 				System.out.println("Oh No");
 			   e.printStackTrace();
 			   return null;
@@ -132,26 +150,29 @@ public class HotelDB {
 		query = query + "'" + state.name() + "'";
 		query = query + "'" + String.valueOf(floor) + "'";
 		query = query + ");";
-		System.out.println(query);
+		
+		//Attempt to create connection to DB, if fails inform user
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-        try {
+        try {	//Attempt to insert room
     		Statement st = con.createStatement();
     		System.out.println(query);
             st.executeUpdate(query);
 		}
-		catch (Exception e) {
+		catch (Exception e) {	//If issues occur print exception and return -1;
 			   System.out.println("Oh No");
 			   e.printStackTrace();
 			   return -1;
 		}
-        return -1;
+        return 0;	//return 0 on success
 	}
 	//----------------------------------Customer---------------------------------------------------//
 	
 	public static Customer getCustomer(int ID, String address, long phonenumber, int bookingID) {
+		//Select * where ID is not null will return all results alone
 		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
+		
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
 		if (address != null) {query = query + " AND address = '" + address + "'";}
@@ -159,17 +180,20 @@ public class HotelDB {
 		if (bookingID != 0) {query = query + " AND booking_id = " + String.valueOf(bookingID);}
 		query = query +  ";";
 		
-		System.out.println(query);
+		//Attempt to create Connection to DB, notify user if connection fails
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
 		
+		//Attempt to retrieve results based on query
         try {
+        	//use connection to execute the SQL Query
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
+            
             Customer cx = null;
-            if (rs.next()) {
-                System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
+            if (rs.next()) {	//If results exist 
+            	//Create and initialize Customer using retrieved information from DB
                 cx = new Customer(rs.getInt(1), rs.getLong(5), rs.getString(6));
                 cx.addMembership(null);// If memberships are added in the future, this will be changed to retrieve a membership
                 Booking b = getCustomerBooking(rs.getInt(1));
@@ -178,9 +202,11 @@ public class HotelDB {
                 	b.setClient(cx);
                 }
                 cx.setBooking(b);//get the booking information
-                return cx;
+                
+                			
+                return cx;	//return the client
             }
-            else {
+            else {	//If no results returned, inform user and return Null;
             	System.out.println("No results found matching query");
             	return null;
             }
@@ -231,6 +257,8 @@ public class HotelDB {
 	}
 	
 	private static Customer getBookingCustomer(int ID) {
+		//Same as regular customer however only used locally to retrieve customer from DB
+		
 		String query = "SELECT * FROM hotel.customer WHERE id IS NOT NULL";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		if (ID != 0) {query = query + " AND id = " + String.valueOf(ID);}	
@@ -264,8 +292,10 @@ public class HotelDB {
 	}
 	
 	public static int createCustomer(int ID, int checkedIn, int booking_id, long phone , String address, String notes, String important_notes, int ticketID) {
+		//Insert or Update customer in SQL customer
 		String query = "USE hotel;\n INSERT INTO customer VALUES (";
-		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+		
+		//Build query based on passed information
 		query = query + "'" + String.valueOf(ID) + "', ";
 		query = query + "'" + String.valueOf(0) + "', ";
 		query = query + "'" + String.valueOf(checkedIn) + "'";
@@ -276,26 +306,31 @@ public class HotelDB {
 		query = query + "'" + important_notes + "'";
 		query = query + "'" + String.valueOf(ticketID) + "'";
 		query = query + ");";
-		System.out.println(query);
+		
+		//If connection is not created Notify user
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
+		//Attempt to insert into DB
         try {
     		Statement st = con.createStatement();
     		System.out.println(query);
             st.executeUpdate(query);
 		}
-		catch (Exception e) {
-			   System.out.println("Oh No");
+		catch (Exception e) {	//If user cannot be inserted in DB print error and return -1
+			   System.out.println("Oh No");	
 			   e.printStackTrace();
 			   return -1;
 		}
-        return -1;
+        return 0; //return 0 on success
 	}
 
 	//----------------------------------Bookings---------------------------------------------------//
 	static public Booking getBooking(int clientID, int roomID, Date checkInDate, Date checkOutDate) {
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	//Add date format to convert to sql date
+		
+		//Add date format to convert to sql date
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
+		
 		//Build Query
 		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";	
 		if (clientID != 0) {query = query + " AND customer_id = " + String.valueOf(clientID);}	
@@ -317,16 +352,20 @@ public class HotelDB {
 			System.out.println("Could not connect to Database");	//If connection cannot be created, will throw error
 		}
 		try {
+			//use connection to execute query
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             Booking book = null;
-            if (rs.next()) {
+            
+            if (rs.next()) { //If results are found
+            	//Store DB variables in local variables
             	int CID = rs.getInt(1);
             	int RID = rs.getInt(2);
             	String CIDate = rs.getString(3);
             	Date in = sdf.parse(CIDate);
             	String CODate = rs.getString(4);
             	Date out = sdf.parse(CODate);
+            	
             	//Get Customer, Get Room then Return complete Booking
             	Customer c = getBookingCustomer(CID);
             	Room r = getRoom(RID, null, null, 0, null);
@@ -335,7 +374,7 @@ public class HotelDB {
             	book.setClient(c);
                 return book;
             }
-            else {
+            else {	//If no results found, inform user and return null
             	System.out.println("No results found matching query");
             	return null;
             }
@@ -348,7 +387,11 @@ public class HotelDB {
 	}
 	
 	static public ArrayList<Booking> getBookings(int clientID, int roomID, Date checkInDate, Date checkOutDate) {
+		//Same as Bookings however returns all results not just first result
+		//Add date format to convert to sql date
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		//Build query 
 		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";
 		if (clientID != 0) {query = query + " AND customer_id = " + String.valueOf(clientID);}	
 		if (roomID != 0) {query = query + " AND room_id = " + String.valueOf(roomID);}
@@ -363,21 +406,26 @@ public class HotelDB {
 		}
 		query = query +  ";";
 		
-		
+		//inform user if connection cannot be created
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
 		try {
+			//Attempt to execute query using connection
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             ArrayList<Booking> bookings= new ArrayList<Booking>();
+            
+            //loop through all results
             while (rs.next()) {
+            	//Store DB variables in local Variables
             	int CID = rs.getInt(1);
             	int RID = rs.getInt(2);
             	String CIDate = rs.getString(3);
             	Date in = sdf.parse(CIDate);
             	String CODate = rs.getString(4);
             	Date out = sdf.parse(CODate);
+            	
             	//Get Customer, Get Room then Return complete Booking
             	Customer c = getBookingCustomer(CID);
             	Room r = getRoom(RID, null, null, 0, null);
@@ -386,9 +434,9 @@ public class HotelDB {
             	book.setClient(c);
                 bookings.add(book);
             }
-            return bookings;
+            return bookings;	//Return array list of bookings
 		}
-		catch (Exception e) {
+		catch (Exception e) {	//If exception occurs, return false
 				System.out.println("Oh No");
 			   e.printStackTrace();
 			   return null;
@@ -396,6 +444,7 @@ public class HotelDB {
 	}
 	
 	static private Booking getCustomerBooking(int clientID) {
+		//Special case of get booking, only used locally
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
@@ -435,6 +484,7 @@ public class HotelDB {
 	}
 	
 	static private Booking getRoomBooking(int booking_id) {
+		//Special case of booking only used locally
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String query = "SELECT * FROM hotel.booking WHERE customer_id IS NOT NULL";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
@@ -473,8 +523,12 @@ public class HotelDB {
 	}
 	
 	public static int createBooking(int ID, int customerID, int roomID, Date in, Date out) {
+		//Add date parser to convert java Date into MySQL date format
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		//Insert into hotel booking table
 		String query = "USE hotel;\n INSERT INTO booking VALUES (";
+		
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		query = query + "'" + String.valueOf(ID) + "', ";
 		query = query + "'" + String.valueOf(customerID) + "', ";
@@ -484,21 +538,23 @@ public class HotelDB {
 		String outDate = sdf.format(out);
 		query = query + "'" + String.valueOf(outDate) + "'";
 		query = query + ");";
-		System.out.println(query);
+		
+		//If connection cannot be created inform user
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
         try {
+        	//Attempt to execute insert statement
     		Statement st = con.createStatement();
     		System.out.println(query);
             st.executeUpdate(query);
 		}
-		catch (Exception e) {
+		catch (Exception e) {	//If error occurs, print exception and return -1
 			   System.out.println("Oh No");
 			   e.printStackTrace();
 			   return -1;
 		}
-        return -1;
+        return 0;	//return 0 on success
 	}
 
 	//----------------------------------Shift---------------------------------------------------//
@@ -658,18 +714,12 @@ public class HotelDB {
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             RoomServiceTicket tckt = null;
             if (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-            	//Store from DB in local variables
+                //Store from DB in local variables
             	int RID = rs.getInt(1);
             	
             	String openT = rs.getString(1);
@@ -708,22 +758,16 @@ public class HotelDB {
 		}
 		query = query +  ";";
 		
-		System.out.println(query);
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
+		
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             MaintenanceTicket tckt = null;
             if (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-            	//Store from DB in local variables
+                //Store from DB in local variables
             	int RID = rs.getInt(1);
             	String openT = rs.getString(2);
             	Date dateOpen = sdf.parse(openT);
@@ -757,22 +801,15 @@ public class HotelDB {
 		}
 		query = query +  ";";
 		
-		System.out.println(query);
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             CleaningTicket tckt = null;
             if (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-            	//Store from DB in local variables
+                //Store from DB in local variables
             	int RID = rs.getInt(1);
             	String openT = rs.getString(2);
             	Date dateOpen = sdf.parse(openT);
@@ -795,6 +832,7 @@ public class HotelDB {
 	}
 	//----------------------------------Get complaint Ticket---------------------------------------------------//
 	public static ComplaintTicket getComplaintTicket(int ticketID, int roomID, Date openTime) {
+		//Add date parser to convert java Date into MySQL date format
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String query = "SELECT * FROM hotel.complaint_ticket WHERE id IS NOT NULL";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
@@ -806,22 +844,15 @@ public class HotelDB {
 		}
 		query = query +  ";";
 		
-		System.out.println(query);
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '123-456-7890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
         try {
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             ComplaintTicket tckt = null;
             if (rs.next()) {
-                //System.out.println("ID: " + rs.getInt(1) + " memID: " + rs.getString(2) + " Checked In: " + rs.getInt(3) + " bookingID: " + rs.getInt(4) + " phone number: " + rs.getLong(5) + " address: " + rs.getString(6));
-            	//Store from DB in local variables
+                //Store from DB in local variables
             	int RID = rs.getInt(1);
             	String openT = rs.getString(2);
             	Date dateOpen = sdf.parse(openT);
@@ -891,26 +922,24 @@ public class HotelDB {
 	}
 	
 	//----------------------------------Get Employee---------------------------------------------------//
-	public static Employee getDeskAttendant(String ID, PermissionType permission) {
-		String query = "SELECT * FROM hotel.complaint_ticket WHERE id IS NOT NULL";
-		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
+	public static Employee getEmployee(String ID, PermissionType permission) {
+		//Using hotelDB employee 
+		String query = "SELECT * FROM hotel.employee WHERE id IS NOT NULL";
+		//Build query based on passed information, if none are passed the query will just return the first Employee which matches the description
 		if (ID != null) {query = query + " AND id = '" + ID +"'";}
 		if (permission != null) {query = query + " AND permission_level = " + permission.name();}
 		query = query +  ";";
 		
-		System.out.println(query);
+		//If connection cannot be created, will throw error
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
-		/*
-		  	USE hotel;
-			INSERT INTO customer (membership_id, checked_in, phone_number, address, notes, important_notes)
-			VALUES ('54321', '0', '1234567890', '1234 fake st', 'allergic to soy', 'does not like armidillos');
-		 */
         try {
+        	//Attempt to execute statement using connection
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             Employee emp = null;
+            
             if (rs.next()) {
                 //Store from DB in local variables
             	String name	 = rs.getString(2);
@@ -935,31 +964,34 @@ public class HotelDB {
 	
 	//----------------------------------Accounts---------------------------------------------------//
 	public static int Login(String username, String password) {
-		String query = "SELECT * FROM hotel.order_request WHERE type IS NOT NULL";
+		//Using hotel accounts table
+		String query = "SELECT * FROM hotel.accounts WHERE type IS NOT NULL";
+		
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
-		query = query + " AND user = " + username +"'";
+		query = query + " AND user = " + username + "'";
 		query = query +  ";";
 		
-		System.out.println(query);
+		//If connection cannot be created, will throw error
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
         try {
-        	
+        	//attempt to use connection to execute Query
     		Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
+            //If no user found return -1
             if (!rs.next()) {
             	return -1;
             }
-            while (rs.next()) {
+            if (rs.next()) {	
                 //Store from DB in local variables
             	String user = rs.getString(0);
             	String pass = rs.getString(1);
+            	//Compare username and password provided with DB username and password
             	if (user == username && pass == password) {
             		return rs.getInt(2);	//type of account 0 is normal, 1 is employee
             	}
             }
-            
 		}
 		catch (Exception e) {
 				System.out.println("Oh No");
@@ -970,26 +1002,30 @@ public class HotelDB {
 	}
 	
 	public static int createAccount(String username, String password, int type) {
+		//Insert into hotel table accounts
 		String query = "USE hotel;\n INSERT INTO accounts VALUES (";
 		//Build query based on passed information, if none are passed the query will just return the first customer which matches the description
 		query = query + "'" + username + "', ";
 		query = query + "'" + password + "', ";
 		query = query + "'" + String.valueOf(type) + "'";
 		query = query + ");";
-		System.out.println(query);
+		
+		//Attempt to create Connection
 		if (!createConnection()) {
 			System.out.println("Could not connect to Database");
 		}
         try {
+        	//attempt to execute insert statement
     		Statement st = con.createStatement();
     		System.out.println(query);
             st.executeUpdate(query);
 		}
-		catch (Exception e) {
-			   System.out.println("Oh No");
-			   e.printStackTrace();
-			   return -1;
+		catch (Exception e) {	
+			//If account is not inserted print error and return -1
+			System.out.println("Oh No");
+			e.printStackTrace();
+			return -1;
 		}
-        return -1;
+        return 0;
 	}
 }
